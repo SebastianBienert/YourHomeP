@@ -21,5 +21,10 @@ namespace YourHome.Infrastructure.Repositories
             var response = _elasticClient.Get<Offer>(id);
             return response.Source;
         }
+
+        public void Add(Offer offer)
+        {
+            _elasticClient.Index(offer, i => i);
+        }
     }
 }

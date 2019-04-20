@@ -8,5 +8,6 @@ namespace YourHome.Core.RepositoryInterfaces
     public interface IOfferRepository
     {
         Offer Get(int id);
+        void Add(Offer offer);
     }
 }

@@ -4,6 +4,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using YourHome.Core.Models.Dtos;
+using YourHome.Core.Services;
 
 namespace YourHome.API.Controllers
 {
@@ -11,6 +13,13 @@ namespace YourHome.API.Controllers
     [ApiController]
     public class OfferController : ControllerBase
     {
+        private readonly IOfferService _offerService;
+
+        public OfferController(IOfferService offerService)
+        {
+            _offerService = offerService;
+        }
+
         // GET: api/Offer
         [HttpGet]
         public IEnumerable<string> Get()
@@ -20,15 +29,16 @@ namespace YourHome.API.Controllers
 
         // GET: api/Offer/5
         [HttpGet("{id}", Name = "Get")]
-        public string Get(int id)
+        public OfferDto Get(int id)
         {
-            return "value";
+            return _offerService.GetOffer(id);
         }
 
         // POST: api/Offer
         [HttpPost]
-        public void Post([FromBody] string value)
+        public void Post([FromBody] OfferDto offerDto)
         {
+            _offerService.SaveOffer(offerDto);
         }
 
         // PUT: api/Offer/5

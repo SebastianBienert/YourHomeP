@@ -1,4 +1,5 @@
 using System;
+using AutoMapper;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -7,6 +8,9 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using YourHome.API.Configuration;
+using YourHome.Core.RepositoryInterfaces;
+using YourHome.Core.Services;
+using YourHome.Infrastructure.Repositories;
 
 namespace API
 {
@@ -24,6 +28,10 @@ namespace API
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
             services.AddElasticsearch(Configuration);
+            services.AddAutoMapper();
+
+            services.AddTransient<IOfferRepository, OfferRepository>();
+            services.AddTransient<IOfferService, OfferService>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
