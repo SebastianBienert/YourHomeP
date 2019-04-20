@@ -20,37 +20,20 @@ namespace YourHome.API.Controllers
             _offerService = offerService;
         }
 
-        // GET: api/Offer
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
-
         // GET: api/Offer/5
         [HttpGet("{id}", Name = "Get")]
-        public OfferDto Get(int id)
+        public IActionResult Get(string id)
         {
-            return _offerService.GetOffer(id);
+            var offerDto = _offerService.GetOffer(id);
+            return Ok(offerDto);
         }
 
         // POST: api/Offer
         [HttpPost]
-        public void Post([FromBody] OfferDto offerDto)
+        public IActionResult Post([FromBody] OfferDto offerDto)
         {
-            _offerService.SaveOffer(offerDto);
-        }
-
-        // PUT: api/Offer/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody] string value)
-        {
-        }
-
-        // DELETE: api/ApiWithActions/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            var createdOfferDto = _offerService.CreateOffer(offerDto);
+            return Ok(createdOfferDto);
         }
     }
 }

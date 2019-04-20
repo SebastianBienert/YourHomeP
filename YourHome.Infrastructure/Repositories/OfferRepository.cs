@@ -16,7 +16,7 @@ namespace YourHome.Infrastructure.Repositories
             _elasticClient = elasticClient;
         }
 
-        public Offer Get(int id)
+        public Offer Get(string id)
         {
             var response = _elasticClient.Get<Offer>(id);
             return response.Source;

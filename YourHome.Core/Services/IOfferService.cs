@@ -4,7 +4,7 @@ namespace YourHome.Core.Services
 {
     public interface IOfferService
     {
-        OfferDto GetOffer(int offerId);
-        void SaveOffer(OfferDto offerDto);
+        OfferDto GetOffer(string offerId);
+        OfferDto CreateOffer(OfferDto offerDto);
     }
 }

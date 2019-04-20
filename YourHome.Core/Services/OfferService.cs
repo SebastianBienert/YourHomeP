@@ -19,16 +19,20 @@ namespace YourHome.Core.Services
             _mapper = mapper;
         }
 
-        public OfferDto GetOffer(int offerId)
+        public OfferDto GetOffer(string offerId)
         {
             var offer = _offerRepository.Get(offerId);
-            return _mapper.Map<OfferDto>(offer);
+            var offerDto = _mapper.Map<OfferDto>(offer);
+            return offerDto;
         }
 
-        public void SaveOffer(OfferDto offerDto)
+        public OfferDto CreateOffer(OfferDto offerDto)
         {
             var offer = _mapper.Map<Offer>(offerDto);
+            offer.Id = Guid.NewGuid().ToString();
             _offerRepository.Add(offer);
+
+            return _mapper.Map<OfferDto>(offer);
         }
     }
 }
