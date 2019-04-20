@@ -20,7 +20,6 @@ namespace YourHome.API.Configuration
                 .DefaultIndex(defaultIndex)
                 .ThrowExceptions();
                 
-
             var client = new ElasticClient(settings);
             
             services.AddSingleton<IElasticClient>(client);
