@@ -1,0 +1,20 @@
+<h1>{{offer.title}}</h1>
+<mat-card>
+    <mat-grid-list cols="4">
+        <mat-grid-tile
+            [colspan]="3"
+            [rowspan]="1">
+            <img src="https://vignette.wikia.nocookie.net/gtawiki/images/e/e2/JohnsonHouse-GTASA-Exterior.jpg/revision/latest?cb=20090309174441" mat-card-image>
+        </mat-grid-tile>
+        <mat-grid-tile
+            [colspan]="1"
+            [rowspan]="2">
+            {{offer.city}}
+        </mat-grid-tile>
+        <mat-grid-tile
+            [colspan]="3"
+            [rowspan]="1">
+            {{offer.description}}
+        </mat-grid-tile>
+      </mat-grid-list>      
+</mat-card>
