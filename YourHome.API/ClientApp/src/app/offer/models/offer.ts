@@ -8,4 +8,6 @@ export class Offer {
     creationDate: Date;
     email: string;
     location: Location;
+    images: string[];
+    area: number;
 }

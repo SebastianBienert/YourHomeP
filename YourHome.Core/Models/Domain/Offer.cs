@@ -13,5 +13,7 @@ namespace YourHome.Core.Models.Domain
         public DateTime CreationDate { get; set; }
         public string Email { get; set; }
         public Location Location { get; set; }
+        public IEnumerable<string> Images { get; set; }
+        public int Area { get; set; }
     }
 }

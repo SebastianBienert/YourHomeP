@@ -12,5 +12,9 @@ namespace YourHome.Core.Models.Dtos
         public decimal Price { get; set; }
         public DateTime CreationDate { get; set; }
         public string Email { get; set; }
+        public LocationDto Location { get; set; }
+        public IEnumerable<string> Images { get; set; }
+        public int Area { get; set; }
+
     }
 }

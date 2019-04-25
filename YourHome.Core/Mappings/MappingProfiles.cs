@@ -12,6 +12,7 @@ namespace YourHome.Core.Mappings
         public MappingProfiles()
         {
             CreateMap<Offer, OfferDto>().ReverseMap();
+            CreateMap<Location, LocationDto>().ReverseMap();
         }
     }
 }
