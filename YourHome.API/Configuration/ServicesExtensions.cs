@@ -18,6 +18,7 @@ namespace YourHome.API.Configuration
 
             var settings = new ConnectionSettings(new Uri(url))
                 .DefaultIndex(defaultIndex)
+                .DefaultTypeName("_doc")
                 .ThrowExceptions();
                 
             var client = new ElasticClient(settings);
