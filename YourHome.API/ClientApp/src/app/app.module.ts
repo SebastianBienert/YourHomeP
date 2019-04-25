@@ -13,6 +13,7 @@ import { OfferDetailsComponent } from './offer/offer-details/offer-details.compo
 import { MatMenuModule } from '@angular/material/menu'; 
 import { MatDividerModule } from '@angular/material/divider'; 
 import {MatListModule} from '@angular/material/list'
+import { router } from './router';
 
 @NgModule({
   declarations: [
@@ -34,11 +35,7 @@ import {MatListModule} from '@angular/material/list'
     MatGridListModule,
     MatDividerModule,
     MatListModule,
-    RouterModule.forRoot([
-      { path: '', component: HomeComponent, pathMatch: 'full' },
-      { path: 'offer/:offerId', component: OfferDetailsComponent },
-      { path: 'fetch-data', component: FetchDataComponent },
-    ]),
+    RouterModule.forRoot(router),
     BrowserAnimationsModule
   ],
   providers: [],
