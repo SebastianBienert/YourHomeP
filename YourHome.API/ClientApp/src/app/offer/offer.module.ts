@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { OfferDetailsComponent } from './offer-details/offer-details.component';
 import { OfferService } from './offer.service';
 import { MatButtonModule, MatCheckboxModule, MatCardModule, MatMenuModule, MatIconModule, MatGridListModule, MatDividerModule, MatListModule } from '@angular/material';
+import { SlideshowModule } from 'ng-simple-slideshow';
 
 @NgModule({
   exports: [OfferDetailsComponent],
@@ -16,7 +17,8 @@ import { MatButtonModule, MatCheckboxModule, MatCardModule, MatMenuModule, MatIc
     MatGridListModule,
     MatDividerModule,
     MatListModule,
-    CommonModule
+    CommonModule,
+    SlideshowModule
   ],
   providers: [OfferService]
 })

@@ -9,8 +9,9 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatMenuModule } from '@angular/material/menu'; 
-import { MatDividerModule } from '@angular/material/divider'; 
-import {MatListModule} from '@angular/material/list'
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
+import { SlideshowModule } from 'ng-simple-slideshow';
 import { router } from './router';
 import { OfferModule } from './offer/offer.module';
 
@@ -34,7 +35,8 @@ import { OfferModule } from './offer/offer.module';
     MatListModule,
     RouterModule.forRoot(router),
     BrowserAnimationsModule,
-    OfferModule
+    OfferModule,
+    SlideshowModule
   ],
   providers: [],
   bootstrap: [AppComponent]
