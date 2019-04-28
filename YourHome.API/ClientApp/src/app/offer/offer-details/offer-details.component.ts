@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OfferService } from '../offer.service';
-import { Offer } from '../models/offer';
+import { Offer, EMPTY_OFFER } from '../models/offer';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -12,7 +12,9 @@ import { ActivatedRoute } from '@angular/router';
 export class OfferDetailsComponent implements OnInit {
 
   constructor(private offerService: OfferService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute) {
+      this.offer = EMPTY_OFFER;
+     }
 
   offer: Offer;
 
