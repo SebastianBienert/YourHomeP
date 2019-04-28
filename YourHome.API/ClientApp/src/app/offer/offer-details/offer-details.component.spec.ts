@@ -5,6 +5,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatButtonModule, MatCheckboxModule, MatCardModule, MatMenuModule, MatIconModule, MatGridListModule, MatDividerModule, MatListModule } from '@angular/material';
 import { OfferService } from '../offer.service';
 import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
+import { SlideshowModule } from 'ng-simple-slideshow';
 import {of} from 'rxjs';
 
 describe('OfferDetailsComponent', () => {
@@ -39,7 +40,8 @@ describe('OfferDetailsComponent', () => {
           MatIconModule,
           MatGridListModule,
           MatDividerModule,
-          MatListModule]
+          MatListModule,
+          SlideshowModule]
     })
     .compileComponents();
   }));
