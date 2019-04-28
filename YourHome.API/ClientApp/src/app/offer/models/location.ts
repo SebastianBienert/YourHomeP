@@ -5,3 +5,11 @@ export class Location {
     houseNumber: string;
     apartmentNumber: string;
 }
+
+export const EMPTY_LOCATION = {
+    city: "",
+    district: "",
+    voivodeship: "",
+    houseNumber: "",
+    apartmentNumber: ""
+}

@@ -7,22 +7,19 @@ import { MatButtonModule, MatCheckboxModule, MatCardModule, MatIconModule, MatGr
 import { AppComponent } from './app.component';
 import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
-import { FetchDataComponent } from './fetch-data/fetch-data.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { OfferDetailsComponent } from './offer/offer-details/offer-details.component';
 import { MatMenuModule } from '@angular/material/menu'; 
-import { MatDividerModule } from '@angular/material/divider'; 
-import { MatListModule } from '@angular/material/list'
+import { MatDividerModule } from '@angular/material/divider';
+import { MatListModule } from '@angular/material/list';
 import { SlideshowModule } from 'ng-simple-slideshow';
 import { router } from './router';
+import { OfferModule } from './offer/offer.module';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HomeComponent,
-    FetchDataComponent,
-    OfferDetailsComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),
@@ -38,6 +35,7 @@ import { router } from './router';
     MatListModule,
     RouterModule.forRoot(router),
     BrowserAnimationsModule,
+    OfferModule,
     SlideshowModule
   ],
   providers: [],
