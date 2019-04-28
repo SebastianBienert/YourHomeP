@@ -1,4 +1,4 @@
-import { Location } from "./location";
+import { Location, EMPTY_LOCATION } from "./location";
 
 export class Offer {
     id: string;
@@ -10,4 +10,16 @@ export class Offer {
     location: Location;
     images: string[];
     area: number;
+}
+
+export const EMPTY_OFFER = {
+    id: "",
+    title: "",
+    description: "",
+    price: null,
+    creationDate: null,
+    email: "",
+    location: EMPTY_LOCATION,
+    images: [],
+    area: null
 }
