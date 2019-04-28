@@ -1,4 +1,4 @@
-import { Location } from "./Location";
+import { Location } from "./location";
 
 export class Offer {
     id: string;
