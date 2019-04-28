@@ -14,10 +14,12 @@ namespace YourHome.API.Controllers
     public class OfferController : ControllerBase
     {
         private readonly IOfferService _offerService;
+        private readonly IEmailService _emailService;
 
-        public OfferController(IOfferService offerService)
+        public OfferController(IOfferService offerService, IEmailService emailService)
         {
             _offerService = offerService;
+            _emailService = emailService;
         }
 
         // GET: api/Offer/5
@@ -36,6 +38,7 @@ namespace YourHome.API.Controllers
             return Ok(createdOfferDto);
         }
 
+
         // GET: api/Offer/Search?searchPhrase=phrase
         [HttpGet("[action]", Name = "Search")]
         public IActionResult Search(string searchPhrase, decimal? minPrice, decimal? maxPrice, int page = 1)
@@ -49,6 +52,20 @@ namespace YourHome.API.Controllers
             };
             var offerDtos = _offerService.SearchOffers(searchArgumentsDto);
             return Ok(offerDtos);
+        }
+
+        [HttpPost("{id}/message", Name = "PostEmailMessage")]
+        public IActionResult SendEmailMessage([FromRoute] string id, [FromBody] EmailMessageDto emailMessageDto)
+        {
+            try
+            {
+                _emailService.SendMessage(id, emailMessageDto);
+                return Ok();
+            }
+            catch (Exception exception)
+            {
+                return BadRequest(exception);
+            }
         }
     }
 }

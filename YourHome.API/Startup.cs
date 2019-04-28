@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using YourHome.API.Configuration;
 using YourHome.Core.RepositoryInterfaces;
 using YourHome.Core.Services;
+using YourHome.Infrastructure;
 using YourHome.Infrastructure.Repositories;
 
 namespace API
@@ -30,8 +31,10 @@ namespace API
             services.AddElasticsearch(Configuration);
             services.AddAutoMapper();
 
-            services.AddTransient<IOfferRepository, OfferRepository>();
-            services.AddTransient<IOfferService, OfferService>();
+            services.AddScoped<IOfferRepository, OfferRepository>();
+            services.AddScoped<IOfferService, OfferService>();
+            services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<IEmailSender, GmailEmailSender>();
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
