@@ -9,5 +9,6 @@ namespace YourHome.Core.RepositoryInterfaces
     {
         Offer Get(string id);
         void Add(Offer offer);
+        IEnumerable<Offer> Search(SearchArguments searchArguments);
     }
 }

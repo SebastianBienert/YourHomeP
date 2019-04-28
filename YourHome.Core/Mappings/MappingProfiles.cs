@@ -13,6 +13,7 @@ namespace YourHome.Core.Mappings
         {
             CreateMap<Offer, OfferDto>().ReverseMap();
             CreateMap<Location, LocationDto>().ReverseMap();
+            CreateMap<SearchArguments, SearchArgumentsDto>().ReverseMap();
         }
     }
 }

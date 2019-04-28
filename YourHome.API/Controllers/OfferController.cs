@@ -27,13 +27,28 @@ namespace YourHome.API.Controllers
             var offerDto = _offerService.GetOffer(id);
             return Ok(offerDto);
         }
-
+        
         // POST: api/Offer
         [HttpPost]
         public IActionResult Post([FromBody] OfferDto offerDto)
         {
             var createdOfferDto = _offerService.CreateOffer(offerDto);
             return Ok(createdOfferDto);
+        }
+
+        // GET: api/Offer/Search?searchPhrase=phrase
+        [HttpGet("[action]", Name = "Search")]
+        public IActionResult Search(string searchPhrase, decimal? minPrice, decimal? maxPrice, int page = 1)
+        {
+            var searchArgumentsDto = new SearchArgumentsDto
+            {
+                MaxPrice = maxPrice,
+                MinPrice = minPrice,
+                Page = page,
+                SearchPhrase = searchPhrase
+            };
+            var offerDtos = _offerService.SearchOffers(searchArgumentsDto);
+            return Ok(offerDtos);
         }
     }
 }
