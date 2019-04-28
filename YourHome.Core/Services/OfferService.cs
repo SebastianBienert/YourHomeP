@@ -26,6 +26,14 @@ namespace YourHome.Core.Services
             return offerDto;
         }
 
+        public IEnumerable<OfferDto> SearchOffers(SearchArgumentsDto searchArgumentsDto)
+        {
+            var searchArguments = _mapper.Map<SearchArguments>(searchArgumentsDto);
+            var offers = _offerRepository.Search(searchArguments);
+            var offerDtos = _mapper.Map<IEnumerable<OfferDto>>(offers);
+            return offerDtos;
+        }
+
         public OfferDto CreateOffer(OfferDto offerDto)
         {
             var offer = _mapper.Map<Offer>(offerDto);

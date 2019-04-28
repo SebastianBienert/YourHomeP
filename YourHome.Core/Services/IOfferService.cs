@@ -1,4 +1,5 @@
-﻿using YourHome.Core.Models.Dtos;
+﻿using System.Collections.Generic;
+using YourHome.Core.Models.Dtos;
 
 namespace YourHome.Core.Services
 {
@@ -6,5 +7,6 @@ namespace YourHome.Core.Services
     {
         OfferDto GetOffer(string offerId);
         OfferDto CreateOffer(OfferDto offerDto);
+        IEnumerable<OfferDto> SearchOffers(SearchArgumentsDto searchArgumentsDto);
     }
 }
