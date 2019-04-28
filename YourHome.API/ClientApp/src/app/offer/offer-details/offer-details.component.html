@@ -1,30 +1,30 @@
-<h1>{{offer.title}}</h1>
-    <mat-grid-list cols="3" rowHeight="300px">
-        <mat-grid-tile
-            [colspan]="2"
-            [rowspan]="1">
-            <mat-card style="width: 100%;height: 100%;">
-            </mat-card>
-        </mat-grid-tile>
-        <mat-grid-tile
-            [colspan]="1"
-            [rowspan]="2">
-            <mat-card style="width: 100%;height: 100%;">
-                    <mat-list>
-                            <mat-list-item>{{offer.location.city}}, {{offer.location.voivodeship}}</mat-list-item>
-                            <mat-divider></mat-divider>
-                            <mat-list-item>{{offer.area}} m2</mat-list-item>
-                            <mat-divider></mat-divider>
-                            <mat-list-item>{{offer.price}} zł</mat-list-item>
-                    </mat-list>                          
-            </mat-card>
-        </mat-grid-tile>
-        <mat-grid-tile
-            [colspan]="2"
-            [rowspan]="1">
-            <mat-card style="width: 100%;height: 100%;">
-                    <h3 style="text-align: center;">Opis</h3>
-                    {{offer.description}}
-            </mat-card>
-        </mat-grid-tile>
-      </mat-grid-list>      
+<h3>{{offer.title}}</h3>
+<mat-grid-list cols="3" rowHeight="300px">
+  <mat-grid-tile [colspan]="2"
+                 [rowspan]="1">
+    <mat-card style="width: 100%; height: 100%;">
+      <slideshow [imageUrls]="urls"></slideshow>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1"
+                 [rowspan]="2">
+    <mat-card style="width: 100%; height: 100%;">
+      <mat-list>
+        <mat-list-item>{{offer.location.city}}, {{offer.location.voivodeship}}</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>{{offer.area}} m2</mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item>{{offer.price}} zł</mat-list-item>
+      </mat-list>
+    </mat-card>
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="2"
+                 [rowspan]="1">
+    <mat-card style="width: 100%; height: 100%;">
+      <h3 style="text-align: center;">Opis</h3>
+      {{offer.description}}
+    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>
+
+

@@ -12,7 +12,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { OfferDetailsComponent } from './offer/offer-details/offer-details.component';
 import { MatMenuModule } from '@angular/material/menu'; 
 import { MatDividerModule } from '@angular/material/divider'; 
-import {MatListModule} from '@angular/material/list'
+import { MatListModule } from '@angular/material/list'
+import { SlideshowModule } from 'ng-simple-slideshow';
 import { router } from './router';
 
 @NgModule({
@@ -36,7 +37,8 @@ import { router } from './router';
     MatDividerModule,
     MatListModule,
     RouterModule.forRoot(router),
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    SlideshowModule
   ],
   providers: [],
   bootstrap: [AppComponent]
