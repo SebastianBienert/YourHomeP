@@ -4,10 +4,11 @@ import { OfferDetailsComponent } from './offer-details/offer-details.component';
 import { OfferService } from './offer.service';
 import { MatButtonModule, MatCheckboxModule, MatCardModule, MatMenuModule, MatIconModule, MatGridListModule, MatDividerModule, MatListModule } from '@angular/material';
 import { SlideshowModule } from 'ng-simple-slideshow';
+import { OffersListComponent } from './offers-list/offers-list.component';
 
 @NgModule({
-  exports: [OfferDetailsComponent],
-  declarations: [OfferDetailsComponent],
+  exports: [OfferDetailsComponent, OffersListComponent],
+  declarations: [OfferDetailsComponent, OffersListComponent],
   imports: [
     MatMenuModule,
     MatButtonModule,
