@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using YourHome.Core.Abstract;
 using YourHome.Core.Models.Domain;
-using YourHome.Core.Models.Dtos;
-using YourHome.Core.RepositoryInterfaces;
 
 namespace YourHome.Core.Services
 {
@@ -19,28 +17,23 @@ namespace YourHome.Core.Services
             _mapper = mapper;
         }
 
-        public OfferDto GetOffer(string offerId)
+        public Offer GetOffer(string offerId)
         {
             var offer = _offerRepository.Get(offerId);
-            var offerDto = _mapper.Map<OfferDto>(offer);
-            return offerDto;
+            return offer;
         }
 
-        public IEnumerable<OfferDto> SearchOffers(SearchArgumentsDto searchArgumentsDto)
+        public IEnumerable<Offer> SearchOffers(SearchArguments searchArguments)
         {
-            var searchArguments = _mapper.Map<SearchArguments>(searchArgumentsDto);
             var offers = _offerRepository.Search(searchArguments);
-            var offerDtos = _mapper.Map<IEnumerable<OfferDto>>(offers);
-            return offerDtos;
+            return offers;
         }
 
-        public OfferDto CreateOffer(OfferDto offerDto)
+        public Offer CreateOffer(Offer offer)
         {
-            var offer = _mapper.Map<Offer>(offerDto);
             offer.Id = Guid.NewGuid().ToString();
             _offerRepository.Add(offer);
-
-            return _mapper.Map<OfferDto>(offer);
+            return offer;
         }
     }
 }

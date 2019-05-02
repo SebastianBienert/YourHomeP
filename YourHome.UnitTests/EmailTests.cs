@@ -2,9 +2,8 @@
 using System.Threading.Tasks;
 using NSubstitute;
 using NUnit.Framework;
+using YourHome.Core.Abstract;
 using YourHome.Core.Models.Domain;
-using YourHome.Core.Models.Dtos;
-using YourHome.Core.RepositoryInterfaces;
 using YourHome.Core.Services;
 
 namespace YourHome.UnitTests
@@ -15,7 +14,7 @@ namespace YourHome.UnitTests
         public async Task EmailServiceShouldUseProperDataToSendEmail()
         {
             //Arrange
-            var emailMassageDto = new EmailMessageDto() {EmailSender = "sender@gmail.com", MessageContent = "test"};
+            var emailMassageDto = new EmailMessage(){EmailSender = "sender@gmail.com", MessageContent = "test"};
             var mockedEmailReceiver = new Offer() {Email = "receiver@gmail.com"};
             var offerRepositoryMock = Substitute.For<IOfferRepository>();
             offerRepositoryMock.Get(Arg.Any<string>()).Returns(args => mockedEmailReceiver);

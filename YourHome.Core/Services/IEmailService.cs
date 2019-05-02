@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using YourHome.Core.Models.Dtos;
+﻿using System.Threading.Tasks;
+using YourHome.Core.Models.Domain;
 
 namespace YourHome.Core.Services
 {
     public interface IEmailService
     {
-        Task SendMessage(string id, EmailMessageDto emailMessageDto);
+        Task SendMessage(string id, EmailMessage emailMessage);
     }
 }

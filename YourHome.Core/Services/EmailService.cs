@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Net;
-using System.Net.Mail;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-using YourHome.Core.Models.Dtos;
-using YourHome.Core.RepositoryInterfaces;
+﻿using System.Threading.Tasks;
+using YourHome.Core.Abstract;
+using YourHome.Core.Models.Domain;
 
 namespace YourHome.Core.Services
 {
@@ -21,12 +15,12 @@ namespace YourHome.Core.Services
             _emailSender = emailSender;
         }
 
-        public async Task SendMessage(string id, EmailMessageDto emailMessageDto)
+        public async Task SendMessage(string id, EmailMessage sendEmailMessage)
         {
             var email = _offerRepository.Get(id).Email;
-            var body = emailMessageDto.MessageContent;
-            var subject = $"[YOUR HOME] - ${emailMessageDto.EmailSender} have a question for your offer";
-            await _emailSender.SendEmailAsync(emailMessageDto.EmailSender, email, body, subject);
+            var body = sendEmailMessage.MessageContent;
+            var subject = $"[YOUR HOME] - ${sendEmailMessage.EmailSender} have a question for your offer";
+            await _emailSender.SendEmailAsync(sendEmailMessage.EmailSender, email, body, subject);
         }
     }
 }
