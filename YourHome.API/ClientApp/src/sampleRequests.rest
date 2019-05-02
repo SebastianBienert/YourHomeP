@@ -2,7 +2,7 @@ POST https://localhost:44311/api/Offer/1/message HTTP/1.1
 content-type: application/json
 
 {
-    "MessageContent": "sample",
+    "MessageContent": "",
     "EmailSender": "seba_94@wp.pl"
 }
 

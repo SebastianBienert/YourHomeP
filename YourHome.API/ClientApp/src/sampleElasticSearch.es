@@ -23,6 +23,25 @@ PUT /offers/_doc/1
     "https://cs2.gamemodding.com/images/6505f2f6339ba167540962d1d1c4c1ce9623e877dd94b4dcec46136c3beaf510.jpg"]
 }
 
+PUT /offers/_doc/2
+{
+    "id": "2",
+    "title": "PWR C-16",
+    "description": "Technopolis",
+    "price": 14590000,
+    "email": "sebastian.bienert96@gmail.com",
+    "location": {
+        "city": "Wroclaw",
+        "district": "",
+        "voivodeship": "dolnoslaskie",
+        "houseNumber": "7",
+        "apartmentNumber": ""
+    },
+    "area": 1510,
+    "images": ["https://gfx.dlastudenta.pl/photos/uczelnie/technopolis_pwr.jpg",
+    "https://www.wroclaw.pl/files/cmsdocuments/7613936/komora_3.jpg"]
+}
+
 DELETE /offers
 PUT /offers
 {
