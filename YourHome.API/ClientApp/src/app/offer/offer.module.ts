@@ -10,10 +10,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { OffersListElementComponent } from './offers-list-element/offers-list-element.component';
+import { RouterModule } from '@angular/router';
+import { router } from '../router';
 
 
 @NgModule({
-  declarations: [OfferDetailsComponent, EmailDialogComponent, OffersListComponent],
+  declarations: [OfferDetailsComponent, EmailDialogComponent, OffersListComponent, OffersListElementComponent],
   imports: [
     MatMenuModule,
     MatButtonModule,
@@ -30,7 +33,9 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
-    InfiniteScrollModule
+    InfiniteScrollModule,
+    RouterModule.forRoot(router),
+
   ],
   providers: [OfferService],
   entryComponents: [
