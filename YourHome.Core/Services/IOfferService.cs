@@ -1,12 +1,12 @@
 ﻿using System.Collections.Generic;
-using YourHome.Core.Models.Dtos;
+using YourHome.Core.Models.Domain;
 
 namespace YourHome.Core.Services
 {
     public interface IOfferService
     {
-        OfferDto GetOffer(string offerId);
-        OfferDto CreateOffer(OfferDto offerDto);
-        IEnumerable<OfferDto> SearchOffers(SearchArgumentsDto searchArgumentsDto);
+        Offer GetOffer(string offerId);
+        Offer CreateOffer(Offer offer);
+        IEnumerable<Offer> SearchOffers(SearchArguments searchArguments);
     }
 }

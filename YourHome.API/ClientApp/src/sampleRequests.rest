@@ -1,0 +1,28 @@
+POST https://localhost:44311/api/Offer/1/message HTTP/1.1
+content-type: application/json
+
+{
+    "MessageContent": "",
+    "EmailSender": "seba_94@wp.pl"
+}
+
+POST https://localhost:44311/api/Offer HTTP/1.1
+content-type: application/json
+
+{
+  "id": null,
+  "title": "Nowa oferta",
+  "description": "Super oferta opis",
+  "price": 1000.0,
+  "creationDate": "0001-01-01T00:00:00",
+  "email": null,
+  "location":   {
+                    "city": "Wroclaw",
+                    "district": null,
+                    "voivodeship": "dolnoslaskie",
+                    "houseNumber": "5",
+                    "apartmentNumber": "4a"
+                },
+  "images": null,
+  "area": 65
+}

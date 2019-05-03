@@ -1,9 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using YourHome.Core.Models.Domain;
 
-namespace YourHome.Core.RepositoryInterfaces
+namespace YourHome.Core.Abstract
 {
     public interface IOfferRepository
     {

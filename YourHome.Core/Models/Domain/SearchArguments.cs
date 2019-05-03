@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace YourHome.Core.Models.Domain
+﻿namespace YourHome.Core.Models.Domain
 {
     public class SearchArguments
     {

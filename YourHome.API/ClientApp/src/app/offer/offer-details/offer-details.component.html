@@ -15,7 +15,15 @@
         <mat-list-item>{{offer.area}} m2</mat-list-item>
         <mat-divider></mat-divider>
         <mat-list-item>{{offer.price}} zł</mat-list-item>
+        <mat-divider></mat-divider>
       </mat-list>
+      <mat-card-actions>
+        <button mat-raised-button (click)="openEmailDialog()">
+          Send message
+          <mat-icon>message</mat-icon>
+        </button>
+      </mat-card-actions>
+      
     </mat-card>
   </mat-grid-tile>
   <mat-grid-tile [colspan]="2"

@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { OfferDetailsComponent } from './offer-details.component';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { MatButtonModule, MatCheckboxModule, MatCardModule, MatMenuModule, MatIconModule, MatGridListModule, MatDividerModule, MatListModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatCardModule, MatMenuModule, MatIconModule, MatGridListModule, MatDividerModule, MatListModule, MatDialogModule } from '@angular/material';
 import { OfferService } from '../offer.service';
 import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
 import { SlideshowModule } from 'ng-simple-slideshow';
@@ -35,12 +35,14 @@ describe('OfferDetailsComponent', () => {
           HttpClientTestingModule,
           MatButtonModule,
           MatCheckboxModule,
+          MatIconModule,
           MatCardModule,
           MatMenuModule,
           MatIconModule,
           MatGridListModule,
           MatDividerModule,
           MatListModule,
+          MatDialogModule,
           SlideshowModule]
     })
     .compileComponents();

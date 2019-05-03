@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Send email</h1>
+<div mat-dialog-content class="container">
+  <mat-form-field>
+    <input required matInput [formControl]="email" placeholder="Email">
+    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <textarea [(ngModel)]="message" cdkTextareaAutosize matInput placeholder="Message"></textarea>
+  </mat-form-field>
+</div>
+<div mat-dialog-actions>
+  <button [disabled]="!email.valid" mat-button mat-raised-button cdkFocusInitial (click)="onSendClick()">
+    Send
+    <mat-icon>send</mat-icon>
+  </button>
+  <button mat-button mat-raised-button (click)="onCancelClick()">Cancel</button>
+</div>

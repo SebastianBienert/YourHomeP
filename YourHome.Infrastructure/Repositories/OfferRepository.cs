@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Nest;
 using System.Collections.Generic;
+using YourHome.Core.Abstract;
 using YourHome.Core.Models.Domain;
-using YourHome.Core.RepositoryInterfaces;
 using Offer = YourHome.Infrastructure.Models.Offer;
 
 namespace YourHome.Infrastructure.Repositories

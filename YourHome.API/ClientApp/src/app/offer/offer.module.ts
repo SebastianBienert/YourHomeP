@@ -2,13 +2,16 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { OfferDetailsComponent } from './offer-details/offer-details.component';
 import { OfferService } from './offer.service';
-import { MatButtonModule, MatCheckboxModule, MatCardModule, MatMenuModule, MatIconModule, MatGridListModule, MatDividerModule, MatListModule } from '@angular/material';
+import { MatButtonModule, MatCheckboxModule, MatCardModule, MatMenuModule, MatIconModule, MatGridListModule, MatDividerModule, MatListModule, MatDialogModule } from '@angular/material';
 import { SlideshowModule } from 'ng-simple-slideshow';
 import { OffersListComponent } from './offers-list/offers-list.component';
+import { EmailDialogComponent } from './email-dialog/email-dialog.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  exports: [OfferDetailsComponent, OffersListComponent],
-  declarations: [OfferDetailsComponent, OffersListComponent],
+  declarations: [OfferDetailsComponent, EmailDialogComponent, OffersListComponent],
   imports: [
     MatMenuModule,
     MatButtonModule,
@@ -19,8 +22,16 @@ import { OffersListComponent } from './offers-list/offers-list.component';
     MatDividerModule,
     MatListModule,
     CommonModule,
-    SlideshowModule
+    SlideshowModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
+    FormsModule,
+    ReactiveFormsModule 
   ],
-  providers: [OfferService]
+  providers: [OfferService],
+  entryComponents: [
+    EmailDialogComponent
+  ]
 })
 export class OfferModule { }

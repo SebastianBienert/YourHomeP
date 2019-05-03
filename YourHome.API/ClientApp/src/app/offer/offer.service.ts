@@ -3,9 +3,11 @@ import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Observable, Observer } from "rxjs";
 import { Offer } from "./models/offer";
 import { SearchParameters } from "./models/search-parameters";
+import { EmailMessage } from "./models/emailMessage";
 
 @Injectable()
 export class OfferService {
+  
 
     constructor(private httpClient: HttpClient) {
     }
@@ -27,6 +29,10 @@ export class OfferService {
         params = params.append('page', searchParameters.page.toString());
 
         return this.httpClient.get<Offer[]>(`api/offer/search`, { params: params });
+    }
+    
+    sendEmail(offerId: string, message : EmailMessage): Observable<any> {
+        return this.httpClient.post(`api/offer/${offerId}/message`, message);
     }
 }
 

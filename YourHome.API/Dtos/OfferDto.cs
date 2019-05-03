@@ -1,8 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace YourHome.Core.Models.Dtos
+namespace YourHome.API.Dtos
 {
     public class OfferDto
     {
