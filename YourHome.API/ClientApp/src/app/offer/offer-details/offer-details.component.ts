@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { OfferService } from '../offer.service';
 import { Offer, EMPTY_OFFER } from '../models/offer';
 import { ActivatedRoute } from '@angular/router';
+import { EmailDialogComponent, EmailDialogData } from '../email-dialog/email-dialog.component';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-offer-details',
@@ -12,7 +14,8 @@ import { ActivatedRoute } from '@angular/router';
 export class OfferDetailsComponent implements OnInit {
 
   constructor(private offerService: OfferService,
-    private route: ActivatedRoute) {
+    private route: ActivatedRoute,
+    public dialog: MatDialog) {
       this.offer = EMPTY_OFFER;
      }
 
@@ -24,4 +27,19 @@ export class OfferDetailsComponent implements OnInit {
       this.offer = o;
     });
   }
+
+  openEmailDialog(){
+    const dialogRef = this.dialog.open(EmailDialogComponent, {
+      minHeight: '300px',
+      minWidth : '550px',
+      data:{
+        offerId : this.offer.id,
+      } as EmailDialogData
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+    });
+  }
+
 }

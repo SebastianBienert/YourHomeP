@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using YourHome.API.Dtos;
 using YourHome.Core.Models.Domain;
-using YourHome.Core.Models.Dtos;
 
-namespace YourHome.Core.Mappings
+namespace YourHome.API.Mappings
 {
     public class MappingProfiles : Profile
     {
@@ -13,7 +10,7 @@ namespace YourHome.Core.Mappings
         {
             CreateMap<Offer, OfferDto>().ReverseMap();
             CreateMap<Location, LocationDto>().ReverseMap();
-            CreateMap<SearchArguments, SearchArgumentsDto>().ReverseMap();
+            CreateMap<EmailMessage, SendEmailMessageDto>().ReverseMap();
         }
     }
 }
