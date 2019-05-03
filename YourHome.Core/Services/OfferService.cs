@@ -9,12 +9,10 @@ namespace YourHome.Core.Services
     public class OfferService : IOfferService
     {
         private readonly IOfferRepository _offerRepository;
-        private readonly IMapper _mapper;
 
-        public OfferService(IOfferRepository offerRepository, IMapper mapper)
+        public OfferService(IOfferRepository offerRepository)
         {
             _offerRepository = offerRepository;
-            _mapper = mapper;
         }
 
         public Offer GetOffer(string offerId)

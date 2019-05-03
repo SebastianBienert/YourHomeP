@@ -9,6 +9,8 @@ import { EmailDialogComponent } from './email-dialog/email-dialog.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+
 
 @NgModule({
   declarations: [OfferDetailsComponent, EmailDialogComponent, OffersListComponent],
@@ -27,7 +29,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    InfiniteScrollModule
   ],
   providers: [OfferService],
   entryComponents: [

@@ -11,13 +11,32 @@ import { SearchParameters } from '../models/search-parameters';
 export class OffersListComponent implements OnInit {
 
   offers: Offer[] = [];
+  searchParameters: SearchParameters = new SearchParameters();
+  throttle = 600;
+  scrollDistance = 2;
+  scrollUpDistance = 2;
 
   constructor(private offerService: OfferService) {
 
-   }
+  }
 
   ngOnInit() {
     this.offerService.search(new SearchParameters()).subscribe(o => this.offers = o)
   }
 
+  onEnter(searchPhrase: string) {
+    this.searchParameters = {
+      searchPhrase: searchPhrase,
+      maxPrice: null,
+      minPrice: null,
+      page: 1
+    }
+    this.offerService.search(this.searchParameters).subscribe(o => this.offers = o)
+  }
+
+  onScroll() {
+    console.log(this.searchParameters.page)
+    this.searchParameters.page++;
+    this.offerService.search(this.searchParameters).subscribe(o => this.offers.push(...o))
+  }
 }
