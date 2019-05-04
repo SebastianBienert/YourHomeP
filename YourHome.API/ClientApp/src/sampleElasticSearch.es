@@ -20,7 +20,8 @@ PUT /offers/_doc/1
     },
     "area": 50,
     "images": ["https://images.adsttc.com/media/images/58bc/4293/e58e/cecd/d000/016d/newsletter/FEATURED_IMAGE.jpg?1488732815",
-    "https://cs2.gamemodding.com/images/6505f2f6339ba167540962d1d1c4c1ce9623e877dd94b4dcec46136c3beaf510.jpg"]
+    "https://cs2.gamemodding.com/images/6505f2f6339ba167540962d1d1c4c1ce9623e877dd94b4dcec46136c3beaf510.jpg"],
+	"state": "Confirmed"
 }
 
 PUT /offers/_doc/2
@@ -39,7 +40,8 @@ PUT /offers/_doc/2
     },
     "area": 1510,
     "images": ["https://gfx.dlastudenta.pl/photos/uczelnie/technopolis_pwr.jpg",
-    "https://www.wroclaw.pl/files/cmsdocuments/7613936/komora_3.jpg"]
+    "https://www.wroclaw.pl/files/cmsdocuments/7613936/komora_3.jpg"],
+	"state": "Confirmed"
 }
 
 DELETE /offers
@@ -85,6 +87,9 @@ PUT /offers
                         "type": "text"
                     }
                 }
+            },
+			"state": {
+                "type": "text"
             }
         }
     }

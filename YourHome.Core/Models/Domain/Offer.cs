@@ -14,5 +14,6 @@ namespace YourHome.Core.Models.Domain
         public Location Location { get; set; }
         public IEnumerable<string> Images { get; set; }
         public int Area { get; set; }
+        public string State { get; set; }
     }
 }
