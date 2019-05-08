@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { MapComponent } from './map.component';
+import { AgmCoreModule } from '@agm/core';
 
 describe('MapComponent', () => {
   let component: MapComponent;
@@ -8,7 +9,12 @@ describe('MapComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ MapComponent ]
+      declarations: [ MapComponent ],
+      imports: [
+        AgmCoreModule.forRoot({
+          apiKey: 'AIzaSyBfHYANteBHqCaytRIED3tJ2SzthNoByyY'
+        })
+      ]
     })
     .compileComponents();
   }));
