@@ -10,6 +10,7 @@ import {MatInputModule} from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MapComponent } from './map/map.component';
 import { AgmCoreModule } from '@agm/core';
+import { ContentLoaderModule } from '@netbasal/ngx-content-loader';
 
 @NgModule({
   declarations: [OfferDetailsComponent, EmailDialogComponent, MapComponent],
@@ -29,9 +30,10 @@ import { AgmCoreModule } from '@agm/core';
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
+    ContentLoaderModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBfHYANteBHqCaytRIED3tJ2SzthNoByyY'
-    }) 
+    })
   ],
   providers: [OfferService],
   entryComponents: [

@@ -9,7 +9,8 @@
   <mat-grid-tile [colspan]="1"
                  [rowspan]="2">
     <mat-card style="width: 100%; height: 100%;">
-      <mat-list>
+      <bullet-list-content-loader *ngIf="loading"></bullet-list-content-loader>
+      <mat-list *ngIf="!loading">
         <mat-list-item>{{offer.location.city}}, {{offer.location.voivodeship}}</mat-list-item>
         <mat-divider></mat-divider>
         <mat-list-item>{{offer.area}} m2</mat-list-item>
@@ -32,7 +33,10 @@
                  [rowspan]="1">
     <mat-card style="width: 100%; height: 100%;">
       <h3 style="text-align: center;">Opis</h3>
-      {{offer.description}}
+      <list-content-loader *ngIf="loading"></list-content-loader>
+      <div *ngIf="!loading">
+          {{offer.description}}
+      </div>
     </mat-card>
   </mat-grid-tile>
 </mat-grid-list>

@@ -20,11 +20,14 @@ export class OfferDetailsComponent implements OnInit {
      }
 
   offer: Offer;
+  loading: boolean;
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('offerId');
+    this.loading = true;
     this.offerService.get(id).subscribe(o => {
       this.offer = o;
+      this.loading = false;
     });
   }
 
