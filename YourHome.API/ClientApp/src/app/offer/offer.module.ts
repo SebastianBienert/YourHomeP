@@ -8,9 +8,11 @@ import { EmailDialogComponent } from './email-dialog/email-dialog.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MapComponent } from './map/map.component';
+import { AgmCoreModule } from '@agm/core';
 
 @NgModule({
-  declarations: [OfferDetailsComponent, EmailDialogComponent],
+  declarations: [OfferDetailsComponent, EmailDialogComponent, MapComponent],
   imports: [
     MatMenuModule,
     MatButtonModule,
@@ -26,7 +28,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBfHYANteBHqCaytRIED3tJ2SzthNoByyY'
+    }) 
   ],
   providers: [OfferService],
   entryComponents: [

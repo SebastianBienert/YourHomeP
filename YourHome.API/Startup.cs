@@ -34,6 +34,7 @@ namespace API
             
 
             services.AddScoped<IOfferRepository, OfferRepository>();
+            services.AddScoped<IGeoCodeProvider, BingGeoCodeProvider>();
             services.AddScoped<IOfferService, OfferService>();
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IEmailSender, GmailEmailSender>();

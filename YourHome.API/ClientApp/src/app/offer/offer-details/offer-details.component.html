@@ -23,7 +23,9 @@
           <mat-icon>message</mat-icon>
         </button>
       </mat-card-actions>
-      
+      <mat-card-footer>
+        <app-map *ngIf="offer.location.coordinates" [lat]="offer.location.coordinates.latitude" [lng]="offer.location.coordinates.longitude"></app-map>
+      </mat-card-footer>
     </mat-card>
   </mat-grid-tile>
   <mat-grid-tile [colspan]="2"
