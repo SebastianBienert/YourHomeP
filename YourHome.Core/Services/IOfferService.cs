@@ -8,5 +8,6 @@ namespace YourHome.Core.Services
         Offer GetOffer(string offerId);
         Offer CreateOffer(Offer offer);
         IEnumerable<Offer> SearchOffers(SearchArguments searchArguments);
+        void ActivateOffer(string offerId);
     }
 }

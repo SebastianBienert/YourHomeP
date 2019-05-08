@@ -32,8 +32,14 @@ namespace YourHome.Core.Services
         public Offer CreateOffer(Offer offer)
         {
             offer.Id = Guid.NewGuid().ToString();
+            offer.State = "Active"; // docelowo i wysyłanie maila -> "Not Confirmed";
             _offerRepository.Add(offer);
             return offer;
+        }
+
+        public void ActivateOffer(string offerId)
+        {
+            _offerRepository.Activate(offerId);
         }
     }
 }
