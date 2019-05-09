@@ -1,0 +1,22 @@
+  <form>
+    <mat-form-field>
+      <input matInput
+        placeholder="szukaj"
+        #box
+        (keyup.enter)="onEnter(box.value)">
+    </mat-form-field>
+  </form>
+  <div class="search-results"
+    infinite-scroll
+    [infiniteScrollDistance]="scrollDistance"
+    [infiniteScrollUpDistance]="scrollUpDistance"
+    [infiniteScrollThrottle]="throttle"
+    (scrolled)="onScroll()">
+    <mat-grid-list cols="2" rowHeight="400px">
+      <mat-grid-tile *ngFor="let offer of offers"
+          [colspan]="1"
+          [rowspan]="1">
+        <app-offers-list-element [offer]="offer"></app-offers-list-element>
+      </mat-grid-tile>
+    </mat-grid-list>    
+  </div>

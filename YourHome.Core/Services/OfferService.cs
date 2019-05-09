@@ -17,7 +17,7 @@ namespace YourHome.Core.Services
             _offerRepository = offerRepository;
             _geoCodeProvider = geoCodeProvider;
         }
-
+        
         public async Task<Offer> GetOfferAsync(string offerId)
         {
             var offer = _offerRepository.Get(offerId);
