@@ -7,6 +7,8 @@ import { OfferService } from '../offer.service';
 import { ActivatedRoute, Router, convertToParamMap } from '@angular/router';
 import { SlideshowModule } from 'ng-simple-slideshow';
 import {of} from 'rxjs';
+import { ContentLoaderModule } from '@netbasal/ngx-content-loader';
+import { NO_ERRORS_SCHEMA } from '@angular/core'
 
 describe('OfferDetailsComponent', () => {
   let component: OfferDetailsComponent;
@@ -43,7 +45,10 @@ describe('OfferDetailsComponent', () => {
           MatDividerModule,
           MatListModule,
           MatDialogModule,
-          SlideshowModule]
+          ContentLoaderModule,
+          SlideshowModule,
+        ],
+      schemas: [NO_ERRORS_SCHEMA]
     })
     .compileComponents();
   }));

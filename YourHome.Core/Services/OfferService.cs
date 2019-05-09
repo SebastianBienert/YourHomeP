@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using YourHome.Core.Abstract;
 using YourHome.Core.Models.Domain;
 
@@ -9,17 +10,19 @@ namespace YourHome.Core.Services
     public class OfferService : IOfferService
     {
         private readonly IOfferRepository _offerRepository;
-        private readonly IMapper _mapper;
+        private readonly IGeoCodeProvider _geoCodeProvider;
 
-        public OfferService(IOfferRepository offerRepository, IMapper mapper)
+        public OfferService(IOfferRepository offerRepository, IGeoCodeProvider geoCodeProvider)
         {
             _offerRepository = offerRepository;
-            _mapper = mapper;
+            _geoCodeProvider = geoCodeProvider;
         }
 
-        public Offer GetOffer(string offerId)
+        public async Task<Offer> GetOfferAsync(string offerId)
         {
             var offer = _offerRepository.Get(offerId);
+            var coordinates = await _geoCodeProvider.GetCoordinatesAsync($"{offer.Location.City}, {offer.Location.HouseNumber}");
+            offer.Location.Coordinates = coordinates;
             return offer;
         }
 

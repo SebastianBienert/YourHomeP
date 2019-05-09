@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using YourHome.Core.Models.Domain;
 
 namespace YourHome.Core.Services
 {
     public interface IOfferService
     {
-        Offer GetOffer(string offerId);
+        Task<Offer> GetOfferAsync(string offerId);
         Offer CreateOffer(Offer offer);
         IEnumerable<Offer> SearchOffers(SearchArguments searchArguments);
     }
