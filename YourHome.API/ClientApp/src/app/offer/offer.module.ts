@@ -13,10 +13,12 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { OffersListElementComponent } from './offers-list-element/offers-list-element.component';
 import { RouterModule } from '@angular/router';
 import { router } from '../router';
-
+import { MapComponent } from './map/map.component';
+import { AgmCoreModule } from '@agm/core';
+import { ContentLoaderModule } from '@netbasal/ngx-content-loader';
 
 @NgModule({
-  declarations: [OfferDetailsComponent, EmailDialogComponent, OffersListComponent, OffersListElementComponent],
+  declarations: [OfferDetailsComponent, EmailDialogComponent, MapComponent, OffersListComponent, OffersListElementComponent],
   imports: [
     MatMenuModule,
     MatButtonModule,
@@ -35,7 +37,10 @@ import { router } from '../router';
     ReactiveFormsModule,
     InfiniteScrollModule,
     RouterModule.forRoot(router),
-
+    ContentLoaderModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBfHYANteBHqCaytRIED3tJ2SzthNoByyY'
+    })
   ],
   providers: [OfferService],
   entryComponents: [

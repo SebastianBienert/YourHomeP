@@ -1,9 +1,10 @@
-export class Location {
+export interface Location {
     city: string;
     district: string;
     voivodeship: string;
     houseNumber: string;
     apartmentNumber: string;
+    coordinates : Coordinates | null;
 }
 
 export const EMPTY_LOCATION = {
@@ -11,5 +12,11 @@ export const EMPTY_LOCATION = {
     district: "",
     voivodeship: "",
     houseNumber: "",
-    apartmentNumber: ""
+    apartmentNumber: "",
+    coordinates : null
+}
+
+export interface Coordinates{
+    latitude : number,
+    longitude : number
 }

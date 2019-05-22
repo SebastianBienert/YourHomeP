@@ -7,5 +7,12 @@
         public string Voivodeship { get; set; }
         public string HouseNumber { get; set; }
         public string ApartmentNumber { get; set; }
+        public CoordinatesDto Coordinates { get; set; }
+    }
+
+    public class CoordinatesDto
+    {
+        public double Latitude { get; set; }
+        public double Longitude { get; set; }
     }
 }
