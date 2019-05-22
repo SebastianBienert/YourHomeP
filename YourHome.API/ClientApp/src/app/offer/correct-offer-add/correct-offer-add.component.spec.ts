@@ -17,34 +17,9 @@ describe('CorrectOfferAddComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [CorrectOfferAddComponent],
-      providers: [
-        OfferService,
-        { 
-          provide: ActivatedRoute, 
-          useValue: { snapshot: { paramMap: convertToParamMap( { 'offerId': '1' } ) } }
-        },
-        {
-          provide: MatDialogRef,
-          useValue: {
-            close: (dialogResult: any) => { }
-          }
-        },
-        { provide: MAT_DIALOG_DATA, useValue: {} }
-      ],
-      imports: [ 
-          HttpClientTestingModule,
-          MatButtonModule,
-          MatIconModule,
-          FormsModule,
-          MatIconModule,
-          MatInputModule,
-          MatFormFieldModule,
-          ReactiveFormsModule,
-          BrowserAnimationsModule,
-          MatDialogModule]
-    })
-    .compileComponents();
+      declarations: [CorrectOfferAddComponent]
+      })
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -53,4 +28,7 @@ describe('CorrectOfferAddComponent', () => {
     fixture.detectChanges();
   });
 
+  it('should create', () => {
+    expect(component).toBeTruthy();
+  });
 });
