@@ -23,19 +23,13 @@ export class OffersListComponent implements OnInit {
   ngOnInit() {
     this.offerService.search(new SearchParameters()).subscribe(o => this.offers = o)
   }
-
-  onEnter(searchPhrase: string) {
-    this.searchParameters = {
-      searchPhrase: searchPhrase,
-      maxPrice: null,
-      minPrice: null,
-      page: 1
-    }
+  
+  onSubmit() {
+    this.searchParameters.page = 1;
     this.offerService.search(this.searchParameters).subscribe(o => this.offers = o)
   }
 
   onScroll() {
-    console.log(this.searchParameters.page)
     this.searchParameters.page++;
     this.offerService.search(this.searchParameters).subscribe(o => this.offers.push(...o))
   }
