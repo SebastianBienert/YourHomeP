@@ -15,6 +15,10 @@ export class OfferService {
         return this.httpClient.get<Offer>(`api/offer/${id}`);
     }
 
+    activate(id: string): Observable<boolean> {
+      return this.httpClient.get<boolean>(`api/offer/activate/${id}`);
+    }
+
     save(newOffer: Offer): Observable<Offer> {
       const httpOptions = {
         headers: new HttpHeaders({

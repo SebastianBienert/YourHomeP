@@ -2,6 +2,10 @@
   width: 100%;
 }
 
-.right-align {
+input {
   text-align: right;
+}
+
+mat-tab-group {
+  min-height: 100%;
 }
