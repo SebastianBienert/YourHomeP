@@ -13,6 +13,7 @@ import { RouterModule } from '@angular/router';
 import { router } from 'src/app/router';
 import { Component, Input } from '@angular/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SearchParameters } from '../models/search-parameters';
 
 describe('OffersListComponent', () => {
   let component: OffersListComponent;
@@ -76,5 +77,47 @@ describe('OffersListComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('onSubmit should perform initial search', () => {
+    // Arrange
+    offerServiceSpy.search.and.returnValue(of([]));
+    offerListComponent.searchParameters = {
+      page: 1,
+      minPrice: 0,
+      maxPrice: 15,
+      searchPhrase: "phrase"
+    }
+
+    // Act
+    offerListComponent.onSubmit();
+
+    // Assert
+    expect(offerServiceSpy.search).toHaveBeenCalledWith(offerListComponent.searchParameters);
+  });
+
+  it('onScroll should perform search with incremented page', () => {
+    // Arrange
+    const expectedSearchParameters: SearchParameters = {
+      page: 2,
+      minPrice: 0,
+      maxPrice: 15,
+      searchPhrase: "phrase"
+    }
+
+    offerServiceSpy.search.and.returnValue(of([]));
+    offerListComponent.searchParameters = {
+      page: 1,
+      minPrice: 0,
+      maxPrice: 15,
+      searchPhrase: "phrase"
+    }
+
+    // Act
+    offerListComponent.onScroll();
+
+    // Assert
+    expect(offerServiceSpy.search).toHaveBeenCalledWith(offerListComponent.searchParameters);
+    expect(offerListComponent.searchParameters).toEqual(expectedSearchParameters);
   });
 });

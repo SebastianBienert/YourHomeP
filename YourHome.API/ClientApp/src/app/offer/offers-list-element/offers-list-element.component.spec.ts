@@ -44,7 +44,10 @@ describe('OffersListElementComponent', () => {
     component = fixture.componentInstance;
     
     let inputOffer = new Offer();
-    inputOffer.images = ["img"]
+    inputOffer.images = ["img", "img2"]
+    inputOffer.title = "title";
+    inputOffer.price = 10;
+    inputOffer.description = "description";
     
     component.offer = inputOffer;
     fixture.detectChanges();
@@ -52,5 +55,29 @@ describe('OffersListElementComponent', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should display offer title', () => {
+    const bannerElement: HTMLElement = fixture.nativeElement;
+    const a = bannerElement.querySelector('mat-card-title a');
+    expect(a.textContent).toEqual('title');
+  });
+
+  it('should display offer description', () => {
+    const bannerElement: HTMLElement = fixture.nativeElement;
+    const p = bannerElement.querySelector('mat-card-content p');
+    expect(p.textContent).toEqual('description');
+  });
+
+  it('should display offer price', () => {
+    const bannerElement: HTMLElement = fixture.nativeElement;
+    const div = bannerElement.querySelector('mat-card-actions div');
+    expect(div.textContent).toEqual('10 zł');
+  });
+
+  it('should display first offer image', () => {
+    const bannerElement: HTMLElement = fixture.nativeElement;
+    const img = bannerElement.querySelector('img');
+    expect(img.getAttribute('src')).toEqual('img');
   });
 });

@@ -11,7 +11,7 @@ namespace YourHome.UnitTests
     class EmailTests
     {
         [Test]
-        public async Task EmailServiceShouldUseProperDataToSendEmail()
+        public async Task EmailService_ShouldUseProperDataToSendEmail()
         {
             //Arrange
             var emailMassageDto = new EmailMessage(){EmailSender = "sender@gmail.com", MessageContent = "test"};
