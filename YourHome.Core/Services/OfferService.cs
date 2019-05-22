@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using YourHome.Core.Abstract;
+using YourHome.Core.Enums;
 using YourHome.Core.Models.Domain;
 
 namespace YourHome.Core.Services
@@ -32,7 +33,7 @@ namespace YourHome.Core.Services
         public Offer CreateOffer(Offer offer)
         {
             offer.Id = Guid.NewGuid().ToString();
-            offer.State = "Active"; // docelowo i wysyłanie maila -> "Not Confirmed";
+            offer.State = (int) StateOffer.NotConfirmed;
             _offerRepository.Add(offer);
             return offer;
         }

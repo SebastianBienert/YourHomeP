@@ -1,51 +1,52 @@
-  <mat-tab-group>
-    <mat-tab label="General">
-      <mat-form-field class="full-width">
-        <input placeholder="Title" id="title" name="titleField" type="text" [(ngModel)]="newOffer.title" matInput required>
-        <mat-error *ngIf="title.invalid">{{getErrorMessage()}}</mat-error>
-        <mat-icon matSuffix>mode_edit</mat-icon>
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <textarea placeholder="Description" id="description" name="descriptionField" [(ngModel)]="newOffer.description" matInput required></textarea>
-        <mat-error *ngIf="description.invalid">{{getErrorMessage()}}</mat-error>
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <input placeholder="Enter your email" id="email" name="emailField" type="email" [(ngModel)]="newOffer.email" [formControl]="email"  matInput required>
-        <mat-error *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
-        <mat-icon matSuffix>mode_edit</mat-icon>
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <input placeholder="Price" type="number" class="right-align" [(ngModel)]="newOffer.price" name="priceField" matInput required>
-        <span matPrefix>$&nbsp;</span>
-        <span matSuffix>zł</span>
-        <mat-error *ngIf="price.invalid">{{getErrorMessage()}}</mat-error>
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <input placeholder="Area" id="area" name="areaField" class="right-align" type="number" [(ngModel)]="newOffer.area" matInput required>
-        <span matSuffix>m2</span>
-        <mat-error *ngIf="area.invalid">{{getErrorMessage()}}</mat-error>
-      </mat-form-field>
-    </mat-tab>
+<mat-progress-bar mode="query" [hidden]="!loading"></mat-progress-bar>
+<mat-tab-group>
+  <mat-tab label="General">
+    <mat-form-field class="full-width">
+      <input placeholder="Title" id="title" name="titleField" type="text" [(ngModel)]="newOffer.title" [formControl]="title" matInput required>
+      <mat-error *ngIf="title.invalid">{{getErrorMessage()}}</mat-error>
+      <mat-icon matSuffix>mode_edit</mat-icon>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input placeholder="Price" type="number" [(ngModel)]="newOffer.price" name="priceField" [formControl]="price" matInput required>
+      <span matPrefix>$&nbsp;</span>
+      <span matSuffix>zł</span>
+      <mat-error *ngIf="price.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input placeholder="Area" id="area" name="areaField" type="number" [(ngModel)]="newOffer.area" [formControl]="area" matInput required>
+      <span matSuffix>m2</span>
+      <mat-error *ngIf="area.invalid">{{getErrorMessage()}}</mat-error>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input placeholder="Enter your email" id="email" name="emailField" type="email" [(ngModel)]="newOffer.email" [formControl]="email" matInput required>
+      <mat-error *ngIf="email.invalid">{{getErrorMessageEmail()}}</mat-error>
+      <mat-icon matSuffix>mode_edit</mat-icon>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <textarea placeholder="Description" id="description" name="descriptionField" [(ngModel)]="newOffer.description" rows="5" matInput></textarea>
+    </mat-form-field>
+  </mat-tab>
     <mat-tab label="Location">
       <mat-form-field class="full-width">
-        <input placeholder="City" id="city" name="cityField" type="text" [(ngModel)]="newOffer.city" matInput required>
+        <input placeholder="City" id="city" name="cityField" type="text" [(ngModel)]="newOffer.location.city" [formControl]="city" matInput required>
         <mat-icon matSuffix>mode_edit</mat-icon>
         <mat-error *ngIf="city.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field class="full-width">
-        <input placeholder="District" id="district" name="districtField" type="text" [(ngModel)]="newOffer.district" matInput>
+        <input placeholder="District" id="district" name="districtField" type="text" [(ngModel)]="newOffer.location.district" matInput>
         <mat-icon matSuffix>mode_edit</mat-icon>
       </mat-form-field>
       <mat-form-field class="full-width">
-        <input placeholder="Voivodeship" id="voivodeship" name="voivodeshipField" type="text" [(ngModel)]="newOffer.voivodeship" matInput>
+        <input placeholder="Voivodeship" id="voivodeship" name="voivodeshipField" type="text" [(ngModel)]="newOffer.location.voivodeship" [formControl]="voivodeship" matInput required>
         <mat-icon matSuffix>mode_edit</mat-icon>
-      </mat-form-field>
-      <mat-form-field class="full-width">
-        <input placeholder="House number" type="number" class="right-align" [(ngModel)]="newOffer.houseNumber" name="houseNumberField" matInput required>
         <mat-error *ngIf="houseNumber.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
       <mat-form-field class="full-width">
-        <input placeholder="Apartment number" type="number" class="right-align" [(ngModel)]="newOffer.apartmentNumber" name="apartmentNumberField" matInput>
+        <input placeholder="House number" type="text" [(ngModel)]="newOffer.location.houseNumber" name="houseNumberField" [formControl]="houseNumber" matInput required>
+        <mat-error *ngIf="houseNumber.invalid">{{getErrorMessage()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input placeholder="Apartment number" type="text" [(ngModel)]="newOffer.location.apartmentNumber" name="apartmentNumberField" [formControl]="apartmentNumber" matInput>
         <mat-error *ngIf="apartmentNumber.invalid">{{getErrorMessage()}}</mat-error>
       </mat-form-field>
     </mat-tab>
@@ -56,8 +57,7 @@
       </mat-form-field>
     </mat-tab>
   </mat-tab-group>
-  
-  <button [disabled]="!email.valid && !title.valid  && !description.valid  && !price.valid  && !area.valid  && !city.valid  && !houseNumber.valid" mat-raised-button color="primary" (click)="save()">Save</button>
+  <button [disabled]="!title.valid || !email.valid || !price.valid || !area.valid || !city.valid || !voivodeship.valid || !houseNumber.valid || loading" mat-raised-button color="primary" (click)="save()">Save</button>
 
 
 

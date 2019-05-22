@@ -17,10 +17,12 @@ export class OfferAddComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     public dialog: MatDialog) {
-      this.newOffer = EMPTY_OFFER;
-     }
+    this.newOffer = EMPTY_OFFER;
+    this.loading = false;
+  }
 
   newOffer: Offer;
+  loading: boolean;
 
   ngOnInit() {
   }
@@ -41,13 +43,13 @@ export class OfferAddComponent implements OnInit {
 
   email = new FormControl('', [Validators.required, Validators.email]);
   title = new FormControl('', [Validators.required]);
-  description = new FormControl('', [Validators.required]);
   price = new FormControl('', [Validators.required, Validators.min(0)]);
-  area = new FormControl('', [Validators.required, Validators.min(0)]);
+  area = new FormControl('', [Validators.required, Validators.min(1)]);
   city = new FormControl('', [Validators.required]);
   houseNumber = new FormControl('', [Validators.required, Validators.min(0)]);
   apartmentNumber = new FormControl('', [Validators.min(0)]);
-
+  voivodeship = new FormControl('', [Validators.required]); 
+  
   getErrorMessageEmail() {
     return this.email.hasError('required') ? 'You must enter a value' :
       this.email.hasError('email') ? 'Not a valid email' :
@@ -59,8 +61,10 @@ export class OfferAddComponent implements OnInit {
   }
 
   save(): void {
-    this.offerService.save(this.newOffer).subscribe();
-    this.newOffer = EMPTY_OFFER;
-    this.router.navigate(['']);
+    this.loading = true;
+    this.offerService.save(this.newOffer).subscribe(result => {
+      this.loading = false;
+      this.router.navigate(['correctAdd/' + result.id]);
+    }, error => { this.loading = false;});
   }
 }

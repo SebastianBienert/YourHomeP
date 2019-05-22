@@ -3,6 +3,7 @@ using Nest;
 using System.Collections.Generic;
 using YourHome.Core.Abstract;
 using YourHome.Core.Models.Domain;
+using YourHome.Infrastructure.Enums;
 using Offer = YourHome.Infrastructure.Models.Offer;
 
 namespace YourHome.Infrastructure.Repositories
@@ -66,10 +67,8 @@ namespace YourHome.Infrastructure.Repositories
         {
             var response = _elasticClient.Get<Offer>(offerId);
             var offer = _mapper.Map<Core.Models.Domain.Offer>(response.Source);
-
             var infrastructureOffer = _mapper.Map<Core.Models.Domain.Offer>(offer);
-            infrastructureOffer.State = "Confirmed";
-            infrastructureOffer.Id = infrastructureOffer.Id + 1;
+            infrastructureOffer.State = (int) StateOffer.Active;
             _elasticClient.Index(infrastructureOffer, i => i);
         }
     }

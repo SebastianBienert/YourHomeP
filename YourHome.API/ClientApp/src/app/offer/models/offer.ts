@@ -10,16 +10,18 @@ export class Offer {
     location: Location;
     images: string[];
     area: number;
+    state: number;
 }
 
 export const EMPTY_OFFER = {
-    id: "",
-    title: "",
-    description: "",
-    price: null,
-    creationDate: null,
-    email: "",
-    location: EMPTY_LOCATION,
-    images: [],
-    area: null
+  id: "",
+  title: "",
+  description: "",
+  price: null,
+  creationDate: null,
+  email: "",
+  location: EMPTY_LOCATION,
+  images: [],
+  area: null,
+  state: 0
 }

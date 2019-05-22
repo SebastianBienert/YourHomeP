@@ -38,6 +38,7 @@ namespace YourHome.API.Controllers
             var offer = _mapper.Map<Offer>(offerDto);
             var createdOffer = _offerService.CreateOffer(offer);
             var createdOfferDto = _mapper.Map<OfferDto>(createdOffer);
+            _emailService.SendActivateMessage(createdOffer.Id);
             return Ok(createdOfferDto);
         }
 
@@ -64,8 +65,26 @@ namespace YourHome.API.Controllers
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
 
+
             var emailMessage = _mapper.Map<EmailMessage>(emailMessageDto);
             _emailService.SendMessage(id, emailMessage);
+            return Ok();
+        }
+
+        // GET: api/Offer/activate/5
+        [HttpGet("activate/{id}", Name = "ActivateOffer")]
+        public IActionResult Activate(string id)
+        {
+            _offerService.ActivateOffer(id);
+            var offer = _offerService.GetOffer(id);
+            var offerDto = _mapper.Map<OfferDto>(offer);
+            return Ok(offerDto);
+        }
+
+        // GET: api/Offer/add
+        [HttpGet("add", Name = "AddOffer")]
+        public IActionResult AddOffer()
+        {
             return Ok();
         }
     }
