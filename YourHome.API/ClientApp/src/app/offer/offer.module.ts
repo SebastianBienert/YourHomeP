@@ -9,13 +9,16 @@ import { EmailDialogComponent } from './email-dialog/email-dialog.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MapComponent } from './map/map.component';
+import { AgmCoreModule } from '@agm/core';
+import { ContentLoaderModule } from '@netbasal/ngx-content-loader';
 import { CorrectOfferAddComponent } from './correct-offer-add/correct-offer-add.component';
 import { ActivateOfferComponent } from './activate-offer/activate-offer.component';
 import { FailureDialogComponent } from './failure-dialog/failure-dialog.component';
 
 
 @NgModule({
-  declarations: [OfferDetailsComponent, OfferAddComponent, EmailDialogComponent, CorrectOfferAddComponent, ActivateOfferComponent, FailureDialogComponent],
+  declarations: [OfferDetailsComponent, OfferAddComponent, EmailDialogComponent, CorrectOfferAddComponent, ActivateOfferComponent, FailureDialogComponent, MapComponent],
   imports: [
     MatMenuModule,
     MatButtonModule,
@@ -33,7 +36,11 @@ import { FailureDialogComponent } from './failure-dialog/failure-dialog.componen
     MatFormFieldModule,
     MatInputModule,
     FormsModule,
-    ReactiveFormsModule 
+    ReactiveFormsModule,
+    ContentLoaderModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyBfHYANteBHqCaytRIED3tJ2SzthNoByyY'
+    })
   ],
   providers: [OfferService],
   entryComponents: [

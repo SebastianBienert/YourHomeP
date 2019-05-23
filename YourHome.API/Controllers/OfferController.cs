@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using YourHome.API.Dtos;
@@ -24,9 +25,9 @@ namespace YourHome.API.Controllers
 
         // GET: api/Offer/5
         [HttpGet("{id}", Name = "Get")]
-        public IActionResult Get(string id)
+        public async Task<IActionResult> Get(string id)
         {
-            var offer = _offerService.GetOffer(id);
+            var offer = await _offerService.GetOfferAsync(id);
             var offerDto = _mapper.Map<OfferDto>(offer);
             return Ok(offerDto);
         }

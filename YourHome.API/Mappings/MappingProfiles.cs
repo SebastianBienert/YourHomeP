@@ -11,6 +11,7 @@ namespace YourHome.API.Mappings
             CreateMap<Offer, OfferDto>().ReverseMap();
             CreateMap<Location, LocationDto>().ReverseMap();
             CreateMap<EmailMessage, SendEmailMessageDto>().ReverseMap();
+            CreateMap<Coordinates, CoordinatesDto>().ReverseMap();
         }
     }
 }
