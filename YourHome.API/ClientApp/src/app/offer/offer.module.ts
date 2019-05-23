@@ -11,10 +11,11 @@ import {MatInputModule} from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CorrectOfferAddComponent } from './correct-offer-add/correct-offer-add.component';
 import { ActivateOfferComponent } from './activate-offer/activate-offer.component';
+import { FailureDialogComponent } from './failure-dialog/failure-dialog.component';
 
 
 @NgModule({
-  declarations: [OfferDetailsComponent, OfferAddComponent, EmailDialogComponent, CorrectOfferAddComponent, ActivateOfferComponent],
+  declarations: [OfferDetailsComponent, OfferAddComponent, EmailDialogComponent, CorrectOfferAddComponent, ActivateOfferComponent, FailureDialogComponent],
   imports: [
     MatMenuModule,
     MatButtonModule,
@@ -36,7 +37,8 @@ import { ActivateOfferComponent } from './activate-offer/activate-offer.componen
   ],
   providers: [OfferService],
   entryComponents: [
-    EmailDialogComponent
+    EmailDialogComponent,
+    FailureDialogComponent
   ]
 })
 export class OfferModule { }

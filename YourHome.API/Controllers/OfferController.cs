@@ -77,7 +77,7 @@ namespace YourHome.API.Controllers
         {
             _offerService.ActivateOffer(id);
             var offer = _offerService.GetOffer(id);
-            return Ok(true);
+            return Ok(offer.State > 0);
         }
 
         // GET: api/Offer/add
