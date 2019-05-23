@@ -77,8 +77,8 @@ namespace YourHome.API.Controllers
         public IActionResult Activate(string id)
         {
             _offerService.ActivateOffer(id);
-            var offer = _offerService.GetOffer(id);
-            return Ok(offer.State > 0);
+            var offer = _offerService.GetOfferAsync(id);
+            return Ok(offer.Result.State > 0);
         }
 
         // GET: api/Offer/add
