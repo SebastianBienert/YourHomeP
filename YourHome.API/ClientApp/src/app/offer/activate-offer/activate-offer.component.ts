@@ -9,7 +9,7 @@ import { OfferService } from '../offer.service';
   providers: [OfferService]
 })
 export class ActivateOfferComponent implements OnInit {
-  offerPath: string;
+  offerId: string;
 
   constructor(private offerService: OfferService,
     private route: ActivatedRoute,
@@ -17,10 +17,8 @@ export class ActivateOfferComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    const offerId = this.route.snapshot.paramMap.get('offerId');
-    this.offerService.activate(offerId).subscribe(o => {
-      this.offerPath = "http://localhost:58118/offer/" + offerId;
-    });
+    this.offerId = this.route.snapshot.paramMap.get('offerId');
+    this.offerService.activate(this.offerId).subscribe();
   }
 
 }

@@ -12,14 +12,14 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./correct-offer-add.component.css']
 })
 export class CorrectOfferAddComponent implements OnInit {
-  offerPath: string;
+  offerId: string;
 
   constructor(private route: ActivatedRoute,
     private router: Router) {
   }
 
   ngOnInit(): void {
-    this.offerPath = "http://localhost:58118/offer/" + this.route.snapshot.paramMap.get('offerId');
+    this.offerId = this.route.snapshot.paramMap.get('offerId');
   }
 
   
