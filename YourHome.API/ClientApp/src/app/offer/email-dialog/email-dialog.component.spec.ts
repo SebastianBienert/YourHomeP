@@ -10,11 +10,13 @@ import { SlideshowModule } from 'ng-simple-slideshow';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { By } from '@angular/platform-browser';
+import { NO_ERRORS_SCHEMA, Component, Input } from '@angular/core';
+import { Offer } from '../models/offer';
 
 describe('EmailDialogComponent', () => {
   let component: EmailDialogComponent;
   let fixture: ComponentFixture<EmailDialogComponent>;
-
+  
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ EmailDialogComponent ],
@@ -42,7 +44,8 @@ describe('EmailDialogComponent', () => {
           MatFormFieldModule,
           ReactiveFormsModule,
           BrowserAnimationsModule,
-          MatDialogModule]
+          MatDialogModule],
+          schemas: [ NO_ERRORS_SCHEMA ]
     })
     .compileComponents();
   }));

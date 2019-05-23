@@ -5,10 +5,15 @@ import { OfferAddComponent } from './offer-add/offer-add.component';
 import { OfferService } from './offer.service';
 import { MatButtonModule, MatCheckboxModule, MatCardModule, MatMenuModule, MatIconModule, MatGridListModule, MatDividerModule, MatListModule, MatDialogModule, MatTabsModule, MatProgressBarModule } from '@angular/material';
 import { SlideshowModule } from 'ng-simple-slideshow';
+import { OffersListComponent } from './offers-list/offers-list.component';
 import { EmailDialogComponent } from './email-dialog/email-dialog.component';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { InfiniteScrollModule } from 'ngx-infinite-scroll';
+import { OffersListElementComponent } from './offers-list-element/offers-list-element.component';
+import { RouterModule } from '@angular/router';
+import { router } from '../router';
 import { MapComponent } from './map/map.component';
 import { AgmCoreModule } from '@agm/core';
 import { ContentLoaderModule } from '@netbasal/ngx-content-loader';
@@ -18,7 +23,7 @@ import { FailureDialogComponent } from './failure-dialog/failure-dialog.componen
 
 
 @NgModule({
-  declarations: [OfferDetailsComponent, OfferAddComponent, EmailDialogComponent, CorrectOfferAddComponent, ActivateOfferComponent, FailureDialogComponent, MapComponent],
+  declarations: [OfferDetailsComponent, OfferAddComponent, EmailDialogComponent, CorrectOfferAddComponent, ActivateOfferComponent, FailureDialogComponent, MapComponent, OffersListComponent, OffersListElementComponent],
   imports: [
     MatMenuModule,
     MatButtonModule,
@@ -37,6 +42,8 @@ import { FailureDialogComponent } from './failure-dialog/failure-dialog.componen
     MatInputModule,
     FormsModule,
     ReactiveFormsModule,
+    InfiniteScrollModule,
+    RouterModule.forRoot(router),
     ContentLoaderModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBfHYANteBHqCaytRIED3tJ2SzthNoByyY'

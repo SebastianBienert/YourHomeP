@@ -1,0 +1,99 @@
+﻿using FluentAssertions;
+using NSubstitute;
+using NUnit.Framework;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using YourHome.Core.Abstract;
+using YourHome.Core.Models.Domain;
+using YourHome.Core.Services;
+
+namespace YourHome.UnitTests
+{
+    [TestFixture]
+    class OfferServiceTests
+    {
+        private IOfferService _offerService;
+        private IOfferRepository _offerRepositoryMock;
+        private IGeoCodeProvider _geoCodeProviderMock;
+
+        [SetUp]
+        public void Init()
+        {
+            _offerRepositoryMock = Substitute.For<IOfferRepository>();
+            _geoCodeProviderMock = Substitute.For<IGeoCodeProvider>();
+            _offerService = new OfferService(_offerRepositoryMock, _geoCodeProviderMock);
+        }
+
+        [Test]
+        public async Task GetOffer_ShouldReturnOffer()
+        {
+            // Arrange
+            var expected = new Offer()
+            {
+                Location = new Location()
+                {
+                    Coordinates = new Coordinates()
+                    {
+                        Latitude = 1,
+                        Longitude = 2
+                    },
+                    City = "city",
+                    HouseNumber = "1"  
+                }
+            };
+
+            var offerId = "offerId";
+            var offer = new Offer()
+            {
+                Location = new Location()
+                {
+                    City = "city",
+                    HouseNumber = "1"
+                }
+            };
+            _offerRepositoryMock.Get(offerId).Returns(offer);
+            _geoCodeProviderMock.GetCoordinatesAsync(Arg.Any<string>()).Returns(new Coordinates() { Latitude = 1, Longitude = 2 });
+
+            // Act
+            var result = await _offerService.GetOfferAsync(offerId);
+
+            // Assert
+            result.Should().BeEquivalentTo(expected);
+        }
+
+        [Test]
+        public void SearchOffers_ShouldReturnOffers()
+        {
+            // Arrange
+            var offers = new List<Offer>() { new Offer() };
+            _offerRepositoryMock.Search(Arg.Any<SearchArguments>()).Returns(offers);
+
+            // Act
+            var result = _offerService.SearchOffers(new SearchArguments()).ToList();
+
+            // Assert
+            result.Should().BeEquivalentTo(offers);
+        }
+
+        [Test]
+        public void CreateOffer_ShouldReturnOfferWithOverridenId()
+        {
+            // Arrange
+            var oldId = "oldId";
+            var offer = new Offer()
+            {
+                Id = oldId
+            };
+            _offerRepositoryMock.Add(Arg.Any<Offer>());
+
+            // Act
+            var result = _offerService.CreateOffer(offer);
+
+            // Assert
+            result.Id.Should().NotBe(oldId);
+        }
+    }
+}

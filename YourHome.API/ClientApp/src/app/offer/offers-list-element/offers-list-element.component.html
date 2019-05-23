@@ -1,0 +1,19 @@
+<mat-card class="example-card">
+  <mat-card-header>
+    <div mat-card-avatar
+      class="example-header-image"></div>
+    <mat-card-title> 
+      <a mat-menu-item [routerLink]="['/offer', offer.id]">{{offer.title}}</a>
+    </mat-card-title>
+  </mat-card-header>
+  <div>
+    <img style="height: 200px; width: 100%;"
+      src={{offer.images[0]}}>
+  </div>
+  <mat-card-content>
+    <p>{{offer.description}}</p>
+  </mat-card-content>
+  <mat-card-actions>
+    <div mat-button>{{offer.price}} zł</div>
+  </mat-card-actions>
+</mat-card>
