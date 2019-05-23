@@ -2,10 +2,6 @@
   width: 100%;
 }
 
-input {
-  text-align: right;
-}
-
 mat-tab-group {
   min-height: 100%;
 }
