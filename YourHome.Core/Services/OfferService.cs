@@ -37,6 +37,7 @@ namespace YourHome.Core.Services
         {
             offer.Id = Guid.NewGuid().ToString();
             offer.State = (int) StateOffer.NotConfirmed;
+            offer.CreationDate = new DateTime();
             _offerRepository.Add(offer);
             return offer;
         }

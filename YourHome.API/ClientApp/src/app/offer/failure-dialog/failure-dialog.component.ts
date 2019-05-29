@@ -10,6 +10,6 @@ export class FailureDialogComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
-    this.errorMessage = "Something go wrong. Please try later.";
+    this.errorMessage = "Something went wrong. Please try later.";
   }
 }
