@@ -41,6 +41,7 @@ export class OfferService {
           'Content-Type': 'application/json'
         })
       };
+      newOffer.creationDate = new Date();
       return this.httpClient.post<Offer>('api/Offer/', newOffer, httpOptions);
     }
 

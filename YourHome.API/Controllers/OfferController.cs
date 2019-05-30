@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using YourHome.API.Dtos;
 using YourHome.Core.Models.Domain;
@@ -39,7 +41,7 @@ namespace YourHome.API.Controllers
             var offer = _mapper.Map<Offer>(offerDto);
             var createdOffer = _offerService.CreateOffer(offer);
             var createdOfferDto = _mapper.Map<OfferDto>(createdOffer);
-            _emailService.SendActivateMessage(createdOffer.Id);
+            _emailService.SendActivateMessage(HttpContext.Request.GetDisplayUrl() + "activateOffer/" + createdOffer.Id);
             return Ok(createdOfferDto);
         }
 
@@ -65,7 +67,6 @@ namespace YourHome.API.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-
 
             var emailMessage = _mapper.Map<EmailMessage>(emailMessageDto);
             _emailService.SendMessage(id, emailMessage);

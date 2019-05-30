@@ -10,6 +10,6 @@ export const router = [
     { path: 'offer/:offerId', component: OfferDetailsComponent },
     { path: 'add', component: OfferAddComponent },
     { path: 'correctAdd/:offerId', component: CorrectOfferAddComponent },
-    { path: 'activateOffer/:offerId', component: ActivateOfferComponent },
+    { path: 'api/Offer/activateOffer/:offerId', component: ActivateOfferComponent },
     { path: 'offers', component: OffersListComponent }
   ]
