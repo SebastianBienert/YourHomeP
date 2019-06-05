@@ -17,6 +17,7 @@ export class OfferDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog) {
       this.offer = EMPTY_OFFER;
+      this.offer.images = ["assets/photos/defaultPhotoHome.png"];
      }
 
   offer: Offer;
