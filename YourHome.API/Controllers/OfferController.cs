@@ -32,7 +32,7 @@ namespace YourHome.API.Controllers
         {
             var offer = await _offerService.GetOfferAsync(id);
             var offerDto = _mapper.Map<OfferDto>(offer);
-            return Ok(offerDto);
+            return Ok(offerDto);    
         }
         
         // POST: api/Offer
@@ -41,7 +41,7 @@ namespace YourHome.API.Controllers
         public IActionResult Post([FromForm] PostOfferDto offerDto)
         {
             var offer = _mapper.Map<Offer>(offerDto);
-            var createdOffer = _offerService.CreateOffer(offer);
+            var createdOffer = _offerService.CreateOffer(offer, offerDto.Files);
             var createdOfferDto = _mapper.Map<OfferDto>(createdOffer);
             _emailService.SendActivateMessage(HttpContext.Request.GetDisplayUrl() + "activateOffer/" + createdOffer.Id);
             return Ok(createdOfferDto);
