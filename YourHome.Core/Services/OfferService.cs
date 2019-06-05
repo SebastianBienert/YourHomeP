@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using YourHome.Core.Abstract;
 using YourHome.Core.Models.Domain;
@@ -11,11 +12,13 @@ namespace YourHome.Core.Services
     {
         private readonly IOfferRepository _offerRepository;
         private readonly IGeoCodeProvider _geoCodeProvider;
+        private readonly IImageUrlBuilder _imageUrlBuilder;
 
-        public OfferService(IOfferRepository offerRepository, IGeoCodeProvider geoCodeProvider)
+        public OfferService(IOfferRepository offerRepository, IGeoCodeProvider geoCodeProvider, IImageUrlBuilder imageUrlBuilder)
         {
             _offerRepository = offerRepository;
             _geoCodeProvider = geoCodeProvider;
+            _imageUrlBuilder = imageUrlBuilder;
         }
 
         public async Task<Offer> GetOfferAsync(string offerId)
@@ -37,6 +40,13 @@ namespace YourHome.Core.Services
             offer.Id = Guid.NewGuid().ToString();
             _offerRepository.Add(offer);
             return offer;
+        }
+
+        public FileStream GetPhoto(string id)
+        {
+            var path = _imageUrlBuilder.Build(id);
+            var image = File.OpenRead(path);
+            return image;
         }
     }
 }

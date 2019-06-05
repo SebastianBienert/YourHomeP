@@ -69,5 +69,19 @@ namespace YourHome.API.Controllers
             _emailService.SendMessage(id, emailMessage);
             return Ok();
         }
+
+        [HttpGet("{id}/photo", Name = "GetUserPhotoById")]
+        public IActionResult GetUserPhoto(string id)
+        {
+            try
+            {
+                var image = _offerService.GetPhoto(id);
+                return File(image, "image/jpeg");
+            }
+            catch (Exception e)
+            {
+                return NotFound();
+            }
+        }
     }
 }
