@@ -41,6 +41,7 @@ namespace YourHome.API.Controllers
         public async Task<IActionResult> Post([FromForm] PostOfferDto offerDto)
         {
             var offer = _mapper.Map<Offer>(offerDto);
+
             var createdOffer = await _offerService.CreateOfferAsync(offer, offerDto.Files);
             var createdOfferDto = _mapper.Map<OfferDto>(createdOffer);
             _emailService.SendActivateMessage(HttpContext.Request.GetDisplayUrl() + "activateOffer/" + createdOffer.Id);

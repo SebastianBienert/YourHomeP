@@ -19,19 +19,16 @@ namespace YourHome.Core.Utils
 
         public async Task<IEnumerable<string>> SaveImagesAsync(IFormFileCollection files)
         {
-            var saveTasks = new List<Task>();
             var imagesIds = new List<string>();
             foreach (var file in files)
             {
                 var id = Guid.NewGuid().ToString();
                 using (var fileStream = new FileStream(Path.Combine(_imagesFolderPath, id + JpgExtenstion), FileMode.Create))
                 {
-                    var saveTask = file.CopyToAsync(fileStream);
-                    saveTasks.Add(saveTask);
+                    await file.CopyToAsync(fileStream);
                 }
                 imagesIds.Add(id);
             }
-            await Task.WhenAll(saveTasks);
             return imagesIds;
         }
     }
