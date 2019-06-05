@@ -9,7 +9,7 @@ namespace YourHome.Core.Services
     public interface IOfferService
     {
         Task<Offer> GetOfferAsync(string offerId);
-        Task<Offer> CreateOffer(Offer offer, IFormFileCollection file);
+        Task<Offer> CreateOfferAsync(Offer offer, IFormFileCollection file);
         IEnumerable<Offer> SearchOffers(SearchArguments searchArguments);
         void ActivateOffer(string offerId);
         FileStream GetPhoto(string id);

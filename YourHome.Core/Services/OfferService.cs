@@ -14,12 +14,12 @@ namespace YourHome.Core.Services
     {
         private readonly IOfferRepository _offerRepository;
         private readonly IGeoCodeProvider _geoCodeProvider;
-        private readonly IImageUrlBuilder _imageUrlBuilder;
+        private readonly IImagePathBuilder _imageUrlBuilder;
         private readonly IImageSaver _imageSaver;
 
         public OfferService(IOfferRepository offerRepository, 
             IGeoCodeProvider geoCodeProvider, 
-            IImageUrlBuilder imageUrlBuilder,
+            IImagePathBuilder imageUrlBuilder,
             IImageSaver imageSaver)
         {
             _offerRepository = offerRepository;
@@ -42,10 +42,11 @@ namespace YourHome.Core.Services
             return offers;
         }
 
-        public async Task<Offer> CreateOffer(Offer offer, IFormFileCollection file)
+        public async Task<Offer> CreateOfferAsync(Offer offer, IFormFileCollection file)
         {
-            await _imageSaver.SaveImagesAsync(file);
+            var imagesIds = await _imageSaver.SaveImagesAsync(file);
             offer.Id = Guid.NewGuid().ToString();
+            offer.Images = imagesIds;
             offer.State = (int)StateOffer.NotConfirmed;
             offer.CreationDate = new DateTime();
             _offerRepository.Add(offer);

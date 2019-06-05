@@ -1,6 +1,6 @@
 ﻿namespace YourHome.Core.Abstract
 {
-    public interface IImageUrlBuilder
+    public interface IImagePathBuilder
     {
         string Build(string imageId);
     }

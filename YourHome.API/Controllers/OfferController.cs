@@ -38,10 +38,10 @@ namespace YourHome.API.Controllers
         // POST: api/Offer
         [HttpPost]
         //        /*public IActionResult Post([FromBody] PostOfferDto offerDto)*/
-        public IActionResult Post([FromForm] PostOfferDto offerDto)
+        public async Task<IActionResult> Post([FromForm] PostOfferDto offerDto)
         {
             var offer = _mapper.Map<Offer>(offerDto);
-            var createdOffer = _offerService.CreateOffer(offer, offerDto.Files);
+            var createdOffer = await _offerService.CreateOfferAsync(offer, offerDto.Files);
             var createdOfferDto = _mapper.Map<OfferDto>(createdOffer);
             _emailService.SendActivateMessage(HttpContext.Request.GetDisplayUrl() + "activateOffer/" + createdOffer.Id);
             return Ok(createdOfferDto);

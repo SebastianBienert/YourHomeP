@@ -5,12 +5,12 @@ using YourHome.Core.Abstract;
 
 namespace YourHome.Core.Utils
 {
-    public class ImageUrlBuilder : IImageUrlBuilder
+    public class ImagePathBuilder : IImagePathBuilder
     {
         private readonly string _imagesFolderPath;
         private const string JpgExtension = ".jpg";
 
-        public ImageUrlBuilder(string imagesFolderPath)
+        public ImagePathBuilder(string imagesFolderPath)
         {
             _imagesFolderPath = imagesFolderPath;
         }

@@ -39,7 +39,7 @@ namespace API
             services.AddScoped<IOfferService, OfferService>();
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IEmailSender, GmailEmailSender>();
-            services.AddScoped<IImageUrlBuilder, ImageUrlBuilder>(i => new ImageUrlBuilder(Configuration["ImagesFolderPath"]));
+            services.AddScoped<IImagePathBuilder, ImagePathBuilder>(i => new ImagePathBuilder(Configuration["ImagesFolderPath"]));
             services.AddScoped<IImageSaver, ImageSaver>(i => new ImageSaver(Configuration["ImagesFolderPath"]));
 
             // In production, the Angular files will be served from this directory
