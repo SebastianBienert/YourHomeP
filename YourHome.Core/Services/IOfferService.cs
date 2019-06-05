@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using YourHome.Core.Models.Domain;
 
@@ -10,5 +11,6 @@ namespace YourHome.Core.Services
         Offer CreateOffer(Offer offer);
         IEnumerable<Offer> SearchOffers(SearchArguments searchArguments);
         void ActivateOffer(string offerId);
+        FileStream GetPhoto(string id);
     }
 }
