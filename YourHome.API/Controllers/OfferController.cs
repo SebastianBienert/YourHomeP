@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -32,17 +33,19 @@ namespace YourHome.API.Controllers
         {
             var offer = await _offerService.GetOfferAsync(id);
             var offerDto = _mapper.Map<OfferDto>(offer);
+            offerDto.Images = CreateUrlsToPhotos(offer.Images);
             return Ok(offerDto);    
         }
         
         // POST: api/Offer
         [HttpPost]
-        //        /*public IActionResult Post([FromBody] PostOfferDto offerDto)*/
         public async Task<IActionResult> Post([FromForm] PostOfferDto offerDto)
         {
             var offer = _mapper.Map<Offer>(offerDto);
             var createdOffer = await _offerService.CreateOfferAsync(offer, offerDto.Files);
             var createdOfferDto = _mapper.Map<OfferDto>(createdOffer);
+            createdOfferDto.Images = CreateUrlsToPhotos(createdOffer.Images);
+
             _emailService.SendActivateMessage(HttpContext.Request.GetDisplayUrl() + "activateOffer/" + createdOffer.Id);
             return Ok(createdOfferDto);
         }
@@ -59,7 +62,13 @@ namespace YourHome.API.Controllers
                 Page = page,
                 SearchPhrase = searchPhrase
             };
-            var offerDtos = _offerService.SearchOffers(searchArguments);
+            var offers = _offerService.SearchOffers(searchArguments);
+            var offerDtos = new List<OfferDto>();
+            foreach (var offer in offers)
+            {
+                var offerDto = _mapper.Map<OfferDto>(offer);
+                offerDto.Images = CreateUrlsToPhotos(offer.Images);
+            }
             return Ok(offerDtos);
         }
 
@@ -77,18 +86,13 @@ namespace YourHome.API.Controllers
 
         // GET: api/Offer/activate/5
         [HttpGet("activate/{id}", Name = "ActivateOffer")]
-        public IActionResult Activate(string id)
+        public async Task<IActionResult> Activate(string id)
         {
             _offerService.ActivateOffer(id);
-            var offer = _offerService.GetOfferAsync(id);
-            return Ok(offer.Result.State > 0);
-        }
-
-        // GET: api/Offer/add
-        [HttpGet("add", Name = "AddOffer")]
-        public IActionResult AddOffer()
-        {
-            return Ok();
+            var offer = await _offerService.GetOfferAsync(id);
+            var activatedOfferDto = _mapper.Map<OfferDto>(offer);
+            activatedOfferDto.Images = CreateUrlsToPhotos(offer.Images);
+            return Ok(activatedOfferDto);
         }
 
         [HttpGet("{id}/photo", Name = "GetUserPhotoById")]
@@ -103,6 +107,11 @@ namespace YourHome.API.Controllers
             {
                 return NotFound();
             }
+        }
+
+        private IEnumerable<string> CreateUrlsToPhotos(IEnumerable<string> ids)
+        {
+            return ids.Select(id => this.Url.Link("GetUserPhotoById", new {id = id}));
         }
     }
 }
