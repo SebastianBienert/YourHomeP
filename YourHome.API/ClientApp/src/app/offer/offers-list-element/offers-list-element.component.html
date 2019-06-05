@@ -8,7 +8,8 @@
   </mat-card-header>
   <div>
     <img style="height: 200px; width: 100%;"
-      src={{offer.images[0]}}>
+         src={{offer.images[0]}}
+         onerror="this.src = 'assets/photos/defaultPhotoHome.png';" >
   </div>
   <mat-card-content>
     <p>{{offer.description}}</p>
