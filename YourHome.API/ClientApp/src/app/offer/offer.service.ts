@@ -42,24 +42,12 @@ export class OfferService {
         })
       };
 
-        //let formData = this.toFormData(newOffer);
-        let formData = new FormData();
-        if(images && images.length)
-            images.forEach(file => formData.append(file.name, file));
-        
-        // console.log(fileItem.name);
-        // data.append('file', fileItem);
-        // data.append('fileSeq', 'seq'+j);
-        // data.append( 'dataType', this.uploadForm.controls.type.value);
-        // this.uploadFile(data).subscribe(data => alert(data.message));
-        const req = new HttpRequest('POST', 'api/Offer/', formData, {
-        reportProgress: true,
-        responseType: 'text'
-      });
+        let formData = this.toFormData(newOffer);
 
-      return this.httpClient.request(req);
-      newOffer.creationDate = new Date();
-      return this.httpClient.post<Offer>('api/Offer/', formData);
+        if(images && images.length)
+            images.forEach(file => formData.append('files', file));
+
+        return this.httpClient.post<Offer>('api/Offer/', formData);
     }
 
     sendEmail(offerId: string, message : EmailMessage): Observable<any> {

@@ -38,7 +38,7 @@ namespace YourHome.API.Controllers
         // POST: api/Offer
         [HttpPost]
         //        /*public IActionResult Post([FromBody] PostOfferDto offerDto)*/
-        public IActionResult Post(IFormFile offerDto)
+        public IActionResult Post([FromForm] PostOfferDto offerDto)
         {
             var offer = _mapper.Map<Offer>(offerDto);
             var createdOffer = _offerService.CreateOffer(offer);
