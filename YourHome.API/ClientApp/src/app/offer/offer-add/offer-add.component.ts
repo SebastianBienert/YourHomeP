@@ -7,6 +7,7 @@ import { MatDialog } from '@angular/material';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { FailureDialogComponent } from '../failure-dialog/failure-dialog.component';
 import {FileUploader} from "ng2-file-upload";
+import { NewLocation } from '../models/location';
 
 @Component({
   selector: 'app-offer-add',
@@ -43,6 +44,7 @@ export class OfferAddComponent implements OnInit {
       area : new FormControl('', [Validators.required, Validators.min(1), Validators.max(999999999999)]),
       city : new FormControl('', [Validators.required, Validators.maxLength(128)]),
       houseNumber : new FormControl('', [Validators.required]),
+      description: new FormControl('', []),
       apartmentNumber : new FormControl('', [Validators.required]),
       district : new FormControl('', [Validators.required]),
       voivodeship : new FormControl('', [Validators.required]),
@@ -50,28 +52,27 @@ export class OfferAddComponent implements OnInit {
     })
   }
 
-  openEmailDialog(){
-    const dialogRef = this.dialog.open(EmailDialogComponent, {
-      minHeight: '300px',
-      minWidth : '550px',
-      data:{
-        offerId: this.newOffer.id,
-      } as EmailDialogData
-    });
-
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
-  }
-
-
-
   save(): void {
     this.loading = true;
 
     const imageFiles: File[] = this.uploader.queue.map(fileItem => fileItem._file)
 
-    this.offerService.save(this.newOffer, imageFiles).subscribe(result => {
+    const newOffer = {
+      title: this.form.get('title').value,
+      description: this.form.get('description').value,
+      price: this.form.get('price').value,
+      email: this.form.get('email').value,
+      location: {
+        city: this.form.get('city').value,
+        district: this.form.get('district').value,
+        voivodeship: this.form.get('voivodeship').value,
+        houseNumber: this.form.get('houseNumber').value,
+        apartmentNumber: this.form.get('apartmentNumber').value
+      } as NewLocation,
+      area: this.form.get('area').value
+    } as NewOffer
+
+    this.offerService.save(newOffer, imageFiles).subscribe(result => {
       this.loading = false;
       this.router.navigate(['correctAdd/' + result.id]);
     }, error => {

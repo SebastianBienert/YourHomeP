@@ -43,7 +43,6 @@ export class OfferService {
       };
 
         let formData = this.toFormData(newOffer);
-
         if(images && images.length)
             images.forEach(file => formData.append('files', file));
 
@@ -58,7 +57,14 @@ export class OfferService {
         const formData = new FormData();
         for (const key of Object.keys(formValue)) {
             const value = formValue[key];
-            formData.append(key, value);
+            if(typeof value === 'object' && value !== null){
+                for(const innerKey of Object.keys(value)){
+                    const innerValue = value[innerKey];
+                    formData.append(innerKey, innerValue);
+                }
+            }
+            else
+                formData.append(key, value);
         }
         return formData;
     }
