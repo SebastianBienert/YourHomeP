@@ -18,8 +18,20 @@ namespace YourHome.API.Dtos
         [FromForm(Name = "email")]
         public string Email { get; set; }
 
-        [FromForm(Name = "location")]
-        public LocationDto Location { get; set; }
+        [FromForm(Name = "city")]
+        public string City { get; set; }
+
+        [FromForm(Name = "district")]
+        public string District { get; set; }
+
+        [FromForm(Name = "voivodeship")]
+        public string Voivodeship { get; set; }
+
+        [FromForm(Name = "houseNumber")]
+        public string HouseNumber { get; set; }
+
+        [FromForm(Name = "apartmentNumber")]
+        public string ApartmentNumber { get; set; }
 
         [FromForm(Name = "files")]
         public IFormFileCollection Files { get; set; }
@@ -30,4 +42,7 @@ namespace YourHome.API.Dtos
         [FromForm(Name = "state")]
         public int State { get; set; }
     }
+
+
+
 }

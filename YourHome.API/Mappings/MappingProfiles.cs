@@ -12,6 +12,18 @@ namespace YourHome.API.Mappings
             CreateMap<Location, LocationDto>().ReverseMap();
             CreateMap<EmailMessage, SendEmailMessageDto>().ReverseMap();
             CreateMap<Coordinates, CoordinatesDto>().ReverseMap();
+
+            CreateMap<PostOfferDto, Offer>()
+                .ForMember(dest => dest.Location,
+                    opts => opts.MapFrom(source => new Location
+                    {
+                        ApartmentNumber = source.ApartmentNumber,
+                        City = source.City,
+                        District = source.District,
+                        HouseNumber = source.HouseNumber,
+                        Voivodeship = source.Voivodeship
+                    }));
+                
         }
     }
 }
