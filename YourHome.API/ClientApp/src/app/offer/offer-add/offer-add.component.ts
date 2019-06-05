@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { OfferService } from '../offer.service';
-import { Offer, EMPTY_OFFER } from '../models/offer';
+import { Offer, EMPTY_NEW_OFFER, NewOffer } from '../models/offer';
 import { ActivatedRoute, Router } from '@angular/router';
 import { EmailDialogComponent, EmailDialogData } from '../email-dialog/email-dialog.component';
 import { MatDialog } from '@angular/material';
-import { FormControl, Validators } from '@angular/forms';
+import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { FailureDialogComponent } from '../failure-dialog/failure-dialog.component';
+import {FileUploader} from "ng2-file-upload";
 
 @Component({
   selector: 'app-offer-add',
@@ -14,18 +15,39 @@ import { FailureDialogComponent } from '../failure-dialog/failure-dialog.compone
   providers: [OfferService]
 })
 export class OfferAddComponent implements OnInit {
+
+  form: FormGroup;
+  newOffer: NewOffer;
+  loading: boolean;
+  textRequiredValue: String = 'You must enter a value';
+
+  public uploader: FileUploader = new FileUploader({
+    isHTML5: true
+  });
+
+
   constructor(private offerService: OfferService,
     private route: ActivatedRoute,
     private router: Router,
-    public dialog: MatDialog) {
-    this.newOffer = EMPTY_OFFER;
+    public dialog: MatDialog,
+    private fb: FormBuilder) {
+    this.newOffer = EMPTY_NEW_OFFER;
     this.loading = false;
   }
 
-  newOffer: Offer;
-  loading: boolean;
-
   ngOnInit() {
+    this.form = this.fb.group({
+      email : new FormControl('', [Validators.required, Validators.email]),
+      title : new FormControl('', [Validators.required, Validators.maxLength(256)]),
+      price : new FormControl('', [Validators.required, Validators.min(0), Validators.max(1000000000)]),
+      area : new FormControl('', [Validators.required, Validators.min(1), Validators.max(999999999999)]),
+      city : new FormControl('', [Validators.required, Validators.maxLength(128)]),
+      houseNumber : new FormControl('', [Validators.required]),
+      apartmentNumber : new FormControl('', [Validators.required]),
+      district : new FormControl('', [Validators.required]),
+      voivodeship : new FormControl('', [Validators.required]),
+      photo : [null, null]
+    })
   }
 
   openEmailDialog(){
@@ -42,9 +64,14 @@ export class OfferAddComponent implements OnInit {
     });
   }
 
+
+
   save(): void {
     this.loading = true;
-    this.offerService.save(this.newOffer).subscribe(result => {
+
+    const imageFiles: File[] = this.uploader.queue.map(fileItem => fileItem._file)
+
+    this.offerService.save(this.newOffer, imageFiles).subscribe(result => {
       this.loading = false;
       this.router.navigate(['correctAdd/' + result.id]);
     }, error => {
@@ -60,69 +87,49 @@ export class OfferAddComponent implements OnInit {
     });
   }
 
-  email = new FormControl('', [Validators.required, Validators.email]);
-  title = new FormControl('', [Validators.required, Validators.maxLength(256)]);
-  price = new FormControl('', [Validators.required, Validators.min(0), Validators.max(1000000000)]);
-  area = new FormControl('', [Validators.required, Validators.min(1), Validators.max(999999999999)]);
-  city = new FormControl('', [Validators.required, Validators.maxLength(128)]);
-  houseNumber = new FormControl('', [Validators.required, Validators.maxLength(128)]);
-  apartmentNumber = new FormControl('', [Validators.maxLength(128)]);
-  district = new FormControl('', [Validators.maxLength(128)]);
-  voivodeship = new FormControl('', [Validators.required, Validators.maxLength(128)]);
-
-  textRequiredValue: String = 'You must enter a value';
-
   getErrorMessageEmail() {
-    return this.email.hasError('required') ? this.textRequiredValue :
-      this.email.hasError('email') ? 'Not a valid email' :
+    return this.form.get('email').hasError('required') ? this.textRequiredValue :
+      this.form.get('email').hasError('email') ? 'Not a valid email' :
         '';
   }
 
   getErrorMessageTitle() {
-    return this.title.hasError('required') ? this.textRequiredValue :
-      this.title.hasError('maxlength') ? 'Title is too long' :
+    return this.form.get('title').hasError('required') ? this.textRequiredValue :
+      this.form.get('title').hasError('maxlength') ? 'Title is too long' :
         '';
   }
 
   getErrorMessagePrice() {
-    return this.price.hasError('required') ? this.textRequiredValue :
-      this.price.hasError('max') ? 'Price is too big' :
-        this.price.hasError('min') ? 'Price must be more then 0' :
+    return this.form.get('price').hasError('required') ? this.textRequiredValue :
+      this.form.get('price').hasError('max') ? 'Price is too big' :
+        this.form.get('price').hasError('min') ? 'Price must be more then 0' :
           '';
   }
 
   getErrorMessageArea() {
-    return this.area.hasError('required') ? this.textRequiredValue :
-      this.area.hasError('max') ? 'Area is too big' :
-        this.area.hasError('min') ? 'Area must be more then 1' :
+    return this.form.get('area').hasError('required') ? this.textRequiredValue :
+      this.form.get('area').hasError('max') ? 'Area is too big' :
+        this.form.get('area').hasError('min') ? 'Area must be more then 1' :
           '';
   }
 
   getErrorMessageCity() {
-    return this.city.hasError('required') ? this.textRequiredValue :
-      this.city.hasError('maxlength') ? 'The name of the city is too long' :
-        '';
+    return this.form.get('city').hasError('required') ? this.textRequiredValue : '';
   }
 
   getErrorMessageHouseNumber() {
-    return this.houseNumber.hasError('required') ? this.textRequiredValue :
-      this.houseNumber.hasError('maxlength') ? 'House number is too long' :
-        '';
+    return this.form.get('houseNumber').hasError('required') ? this.textRequiredValue : '';
   }
 
   getErrorMessageApartmentNumber() {
-    return this.apartmentNumber.hasError('maxlength') ? 'Apartment number is too long' :
-      '';
+    return this.form.get('apartmentNumber').hasError('required') ? this.textRequiredValue : '';
   }
 
   getErrorMessageDistrict() {
-    return this.district.hasError('maxlength') ? 'The name of the district is too long' :
-      '';
+    return this.form.get('district').hasError('required') ? this.textRequiredValue : '';
   }
 
   getErrorMessageVoivodeship() {
-    return this.voivodeship.hasError('required') ? this.textRequiredValue :
-      this.voivodeship.hasError('maxlength') ? 'The name of the voivodeship is too long' :
-        '';
+    return this.form.get('voivodeship').hasError('required') ? this.textRequiredValue : '';
   }
 }

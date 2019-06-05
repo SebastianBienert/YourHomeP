@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using YourHome.API.Dtos;
@@ -36,7 +37,8 @@ namespace YourHome.API.Controllers
         
         // POST: api/Offer
         [HttpPost]
-        public IActionResult Post([FromBody] OfferDto offerDto)
+        //        /*public IActionResult Post([FromBody] PostOfferDto offerDto)*/
+        public IActionResult Post(IFormFile offerDto)
         {
             var offer = _mapper.Map<Offer>(offerDto);
             var createdOffer = _offerService.CreateOffer(offer);
