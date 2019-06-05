@@ -69,6 +69,7 @@ namespace YourHome.API.Controllers
             {
                 var offerDto = _mapper.Map<OfferDto>(offer);
                 offerDto.Images = CreateUrlsToPhotos(offer.Images);
+                offerDtos.Add(offerDto);
             }
             return Ok(offerDtos);
         }
