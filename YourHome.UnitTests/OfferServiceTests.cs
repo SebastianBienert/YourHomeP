@@ -2,10 +2,8 @@
 using Microsoft.AspNetCore.Http;
 using NSubstitute;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using YourHome.Core.Abstract;
 using YourHome.Core.Models.Domain;
