@@ -15,7 +15,6 @@ import { SlideshowModule } from 'ng-simple-slideshow';
 import { router } from './router';
 import { OfferModule } from './offer/offer.module';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +37,7 @@ import { OfferModule } from './offer/offer.module';
     BrowserAnimationsModule,
     OfferModule,
     SlideshowModule
+
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -17,32 +17,36 @@ export class OfferDetailsComponent implements OnInit {
     private route: ActivatedRoute,
     public dialog: MatDialog) {
       this.offer = EMPTY_OFFER;
+      this.offer.images = ["assets/photos/defaultPhotoHome.png"];
      }
 
   offer: Offer;
   loading: boolean;
+  isActive: boolean;
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('offerId');
     this.loading = true;
     this.offerService.get(id).subscribe(o => {
+      this.isActive = o.state > 0;
       this.offer = o;
       this.loading = false;
     });
   }
 
-  openEmailDialog(){
-    const dialogRef = this.dialog.open(EmailDialogComponent, {
-      minHeight: '300px',
-      minWidth : '550px',
-      data:{
-        offerId : this.offer.id,
-      } as EmailDialogData
-    });
+  openEmailDialog() {
+    if (this.isActive) {
+      const dialogRef = this.dialog.open(EmailDialogComponent, {
+        minHeight: '300px',
+        minWidth: '550px',
+        data: {
+          offerId: this.offer.id,
+        } as EmailDialogData
+      });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-    });
+      dialogRef.afterClosed().subscribe(result => {
+        console.log('The dialog was closed');
+      });
+    }
   }
-
 }

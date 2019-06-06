@@ -6,5 +6,6 @@ namespace YourHome.Core.Services
     public interface IEmailService
     {
         Task SendMessage(string id, EmailMessage emailMessage);
+        Task SendActivateMessage(string id);
     }
 }

@@ -10,6 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using YourHome.API.Configuration;
 using YourHome.Core.Abstract;
 using YourHome.Core.Services;
+using YourHome.Core.Utils;
 using YourHome.Infrastructure;
 using YourHome.Infrastructure.Repositories;
 
@@ -38,6 +39,8 @@ namespace API
             services.AddScoped<IOfferService, OfferService>();
             services.AddScoped<IEmailService, EmailService>();
             services.AddScoped<IEmailSender, GmailEmailSender>();
+            services.AddScoped<IImagePathBuilder, ImagePathBuilder>(i => new ImagePathBuilder(Configuration["ImagesFolderPath"]));
+            services.AddScoped<IImageSaver, ImageSaver>(i => new ImageSaver(Configuration["ImagesFolderPath"]));
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>

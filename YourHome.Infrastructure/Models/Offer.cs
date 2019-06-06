@@ -14,5 +14,6 @@ namespace YourHome.Infrastructure.Models
         public Location Location { get; set; }
         public IEnumerable<string> Images { get; set; }
         public int Area { get; set; }
+        public int State { get; set; }
     }
 }

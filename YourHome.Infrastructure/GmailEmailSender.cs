@@ -32,7 +32,11 @@ namespace YourHome.Infrastructure
                     await smtpClient.SendMailAsync(message);
                 }
             }
-   
+        }
+
+        public async Task SendEmailFromAdminAsync(string receiverAddress, string body, string subject)
+        {
+            await SendEmailAsync(_configuration["Gmail:Email"], receiverAddress, body, subject);
         }
     }
 }

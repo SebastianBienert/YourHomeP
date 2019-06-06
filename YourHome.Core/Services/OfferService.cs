@@ -1,8 +1,11 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using YourHome.Core.Abstract;
+using YourHome.Core.Enums;
 using YourHome.Core.Models.Domain;
 
 namespace YourHome.Core.Services
@@ -11,11 +14,18 @@ namespace YourHome.Core.Services
     {
         private readonly IOfferRepository _offerRepository;
         private readonly IGeoCodeProvider _geoCodeProvider;
+        private readonly IImagePathBuilder _imageUrlBuilder;
+        private readonly IImageSaver _imageSaver;
 
-        public OfferService(IOfferRepository offerRepository, IGeoCodeProvider geoCodeProvider)
+        public OfferService(IOfferRepository offerRepository, 
+            IGeoCodeProvider geoCodeProvider, 
+            IImagePathBuilder imageUrlBuilder,
+            IImageSaver imageSaver)
         {
             _offerRepository = offerRepository;
             _geoCodeProvider = geoCodeProvider;
+            _imageUrlBuilder = imageUrlBuilder;
+            _imageSaver = imageSaver;
         }
 
         public async Task<Offer> GetOfferAsync(string offerId)
@@ -32,11 +42,27 @@ namespace YourHome.Core.Services
             return offers;
         }
 
-        public Offer CreateOffer(Offer offer)
+        public async Task<Offer> CreateOfferAsync(Offer offer, IFormFileCollection file)
         {
+            var imagesIds = await _imageSaver.SaveImagesAsync(file);
             offer.Id = Guid.NewGuid().ToString();
+            offer.Images = imagesIds;
+            offer.State = (int)StateOffer.NotConfirmed;
+            offer.CreationDate = new DateTime();
             _offerRepository.Add(offer);
             return offer;
+        }
+        
+        public void ActivateOffer(string offerId)
+        {
+            _offerRepository.Activate(offerId);
+        }
+
+        public FileStream GetPhoto(string id)
+        {
+            var path = _imageUrlBuilder.Build(id);
+            var image = File.OpenRead(path);
+            return image;
         }
     }
 }

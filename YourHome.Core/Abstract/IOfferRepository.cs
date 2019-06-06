@@ -8,5 +8,6 @@ namespace YourHome.Core.Abstract
         Offer Get(string id);
         void Add(Offer offer);
         IEnumerable<Offer> Search(SearchArguments searchArguments);
+        void Activate(string id);
     }
 }

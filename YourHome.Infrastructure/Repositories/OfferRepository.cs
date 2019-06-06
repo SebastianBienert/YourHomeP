@@ -3,6 +3,7 @@ using Nest;
 using System.Collections.Generic;
 using YourHome.Core.Abstract;
 using YourHome.Core.Models.Domain;
+using YourHome.Infrastructure.Enums;
 using Offer = YourHome.Infrastructure.Models.Offer;
 
 namespace YourHome.Infrastructure.Repositories
@@ -60,6 +61,15 @@ namespace YourHome.Infrastructure.Repositories
 
             var offers = _mapper.Map<IEnumerable<Core.Models.Domain.Offer>>(searchResponse.Documents);
             return offers;
+        }
+
+        public void Activate(string offerId)
+        {
+            var response = _elasticClient.Get<Offer>(offerId);
+            var offer = _mapper.Map<Core.Models.Domain.Offer>(response.Source);
+            var infrastructureOffer = _mapper.Map<Core.Models.Domain.Offer>(offer);
+            infrastructureOffer.State = (int) StateOffer.Active;
+            _elasticClient.Index(infrastructureOffer, i => i);
         }
     }
 }

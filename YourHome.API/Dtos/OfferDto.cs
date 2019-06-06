@@ -14,5 +14,6 @@ namespace YourHome.API.Dtos
         public LocationDto Location { get; set; }
         public IEnumerable<string> Images { get; set; }
         public int Area { get; set; }
+        public int State { get; set; }
     }
 }

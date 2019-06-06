@@ -1,10 +1,9 @@
 ﻿using FluentAssertions;
+using Microsoft.AspNetCore.Http;
 using NSubstitute;
 using NUnit.Framework;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using YourHome.Core.Abstract;
 using YourHome.Core.Models.Domain;
@@ -18,13 +17,18 @@ namespace YourHome.UnitTests
         private IOfferService _offerService;
         private IOfferRepository _offerRepositoryMock;
         private IGeoCodeProvider _geoCodeProviderMock;
+        private IImagePathBuilder _imagePathBuilder;
+        private IImageSaver _imageSaver;
 
         [SetUp]
         public void Init()
         {
             _offerRepositoryMock = Substitute.For<IOfferRepository>();
             _geoCodeProviderMock = Substitute.For<IGeoCodeProvider>();
-            _offerService = new OfferService(_offerRepositoryMock, _geoCodeProviderMock);
+            _imagePathBuilder = Substitute.For<IImagePathBuilder>();
+            _imageSaver = Substitute.For<IImageSaver>();
+
+            _offerService = new OfferService(_offerRepositoryMock, _geoCodeProviderMock, _imagePathBuilder, _imageSaver);
         }
 
         [Test]
@@ -79,7 +83,7 @@ namespace YourHome.UnitTests
         }
 
         [Test]
-        public void CreateOffer_ShouldReturnOfferWithOverridenId()
+        public async Task CreateOffer_ShouldReturnOfferWithOverridenId()
         {
             // Arrange
             var oldId = "oldId";
@@ -89,8 +93,10 @@ namespace YourHome.UnitTests
             };
             _offerRepositoryMock.Add(Arg.Any<Offer>());
 
+            _imageSaver.SaveImagesAsync(Arg.Any<IFormFileCollection>()).Returns(new List<string>());
+
             // Act
-            var result = _offerService.CreateOffer(offer);
+            var result = await _offerService.CreateOfferAsync(offer, null);
 
             // Assert
             result.Id.Should().NotBe(oldId);
