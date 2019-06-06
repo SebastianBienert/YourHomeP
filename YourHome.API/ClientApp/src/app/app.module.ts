@@ -14,15 +14,12 @@ import { MatListModule } from '@angular/material/list';
 import { SlideshowModule } from 'ng-simple-slideshow';
 import { router } from './router';
 import { OfferModule } from './offer/offer.module';
-import { FileUploadComponent } from './file-upload/file-upload.component';
-import {FileSelectDirective, FileDropDirective } from 'ng2-file-upload/ng2-file-upload';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavMenuComponent,
-    HomeComponent,
-    FileUploadComponent
+    HomeComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

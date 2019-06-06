@@ -20,7 +20,7 @@ import { ContentLoaderModule } from '@netbasal/ngx-content-loader';
 import { CorrectOfferAddComponent } from './correct-offer-add/correct-offer-add.component';
 import { ActivateOfferComponent } from './activate-offer/activate-offer.component';
 import { FailureDialogComponent } from './failure-dialog/failure-dialog.component';
-import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload';
+import { FileSelectDirective, FileDropDirective, FileUploadModule } from 'ng2-file-upload';
 
 
 @NgModule({
@@ -33,10 +33,11 @@ import { FileSelectDirective, FileDropDirective } from 'ng2-file-upload';
     FailureDialogComponent,
     MapComponent,
     OffersListComponent,
-    FileSelectDirective,
-    FileDropDirective,
+    // FileSelectDirective,
+    // FileDropDirective,
     OffersListElementComponent],
   imports: [
+    FileUploadModule,
     MatMenuModule,
     MatButtonModule,
     MatCheckboxModule,
