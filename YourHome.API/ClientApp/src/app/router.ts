@@ -6,7 +6,7 @@ import { CorrectOfferAddComponent } from "./offer/correct-offer-add/correct-offe
 import { ActivateOfferComponent } from './offer/activate-offer/activate-offer.component';
 
 export const router = [
-    { path: '', component: HomeComponent, pathMatch: 'full' },
+    { path: '', component: OffersListComponent, pathMatch: 'full' },
     { path: 'offer/:offerId', component: OfferDetailsComponent },
     { path: 'add', component: OfferAddComponent },
     { path: 'correctAdd/:offerId', component: CorrectOfferAddComponent },

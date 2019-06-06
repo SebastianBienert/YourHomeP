@@ -41,7 +41,7 @@
       </mat-form-field>
       <mat-form-field class="full-width">
         <input placeholder="District" id="district" name="districtField" type="text" 
-          formControlName="district" matInput>
+          formControlName="district" matInput required>
         <mat-error *ngIf="form.get('apartmentNumber').invalid">{{getErrorMessageDistrict()}}</mat-error>
         <mat-icon matSuffix>mode_edit</mat-icon>
       </mat-form-field>
@@ -58,7 +58,7 @@
       </mat-form-field>
       <mat-form-field class="full-width">
         <input placeholder="Apartment number" type="text" name="apartmentNumberField"
-          formControlName="apartmentNumber" matInput>
+          formControlName="apartmentNumber" matInput required>
         <mat-error *ngIf="form.get('apartmentNumber').invalid">{{getErrorMessageApartmentNumber()}}</mat-error>
       </mat-form-field>
     </mat-tab>
