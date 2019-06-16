@@ -2,9 +2,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using Nest;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace YourHome.API.Configuration
 {
@@ -18,6 +15,7 @@ namespace YourHome.API.Configuration
 
             var settings = new ConnectionSettings(new Uri(url))
                 .DefaultIndex(defaultIndex)
+                .DefaultTypeName("_doc")
                 .ThrowExceptions();
                 
             var client = new ElasticClient(settings);

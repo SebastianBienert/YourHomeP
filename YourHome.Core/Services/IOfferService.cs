@@ -1,10 +1,17 @@
-﻿using YourHome.Core.Models.Dtos;
+﻿using Microsoft.AspNetCore.Http;
+using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+using YourHome.Core.Models.Domain;
 
 namespace YourHome.Core.Services
 {
     public interface IOfferService
     {
-        OfferDto GetOffer(string offerId);
-        OfferDto CreateOffer(OfferDto offerDto);
+        Task<Offer> GetOfferAsync(string offerId);
+        Task<Offer> CreateOfferAsync(Offer offer, IFormFileCollection file);
+        IEnumerable<Offer> SearchOffers(SearchArguments searchArguments);
+        void ActivateOffer(string offerId);
+        FileStream GetPhoto(string id);
     }
 }

@@ -1,0 +1,107 @@
+<mat-progress-bar mode="query" [hidden]="!loading"></mat-progress-bar>
+<form [formGroup]="form" (ngSubmit)="save()">
+  <mat-tab-group>
+    <mat-tab label="General">
+      <mat-form-field class="full-width">
+        <input placeholder="Title" id="title" name="titleField" type="text" formControlName="title"
+          matInput required>
+        <mat-error *ngIf="form.get('title').invalid">{{getErrorMessageTitle()}}</mat-error>
+        <mat-icon matSuffix>mode_edit</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input placeholder="Price" type="number" name="priceField" formControlName="price"
+          matInput required>
+        <span matPrefix>$&nbsp;</span>
+        <span matSuffix>zł</span>
+        <mat-error *ngIf="form.get('price').invalid">{{getErrorMessagePrice()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input placeholder="Area" id="area" name="areaField" type="number" formControlName="area"
+          matInput required>
+        <span matSuffix>m2</span>
+        <mat-error *ngIf="form.get('area').invalid">{{getErrorMessageArea()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input placeholder="Enter your email" id="email" name="emailField" type="email"
+          formControlName="email" matInput required>
+        <mat-error *ngIf="form.get('email').invalid">{{getErrorMessageEmail()}}</mat-error>
+        <mat-icon matSuffix>mode_edit</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <textarea formControlName="description" placeholder="Description" id="description" name="descriptionField"
+          rows="5" matInput></textarea>
+      </mat-form-field>
+    </mat-tab>
+    <mat-tab label="Location">
+      <mat-form-field class="full-width">
+        <input placeholder="City" id="city" name="cityField" type="text"
+          formControlName="city" matInput required>
+        <mat-icon matSuffix>mode_edit</mat-icon>
+        <mat-error *ngIf="form.get('city').invalid">{{getErrorMessageCity()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input placeholder="District" id="district" name="districtField" type="text" 
+          formControlName="district" matInput required>
+        <mat-error *ngIf="form.get('apartmentNumber').invalid">{{getErrorMessageDistrict()}}</mat-error>
+        <mat-icon matSuffix>mode_edit</mat-icon>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input placeholder="Voivodeship" id="voivodeship" name="voivodeshipField" type="text"
+          formControlName="voivodeship" matInput required>
+        <mat-icon matSuffix>mode_edit</mat-icon>
+        <mat-error *ngIf="form.get('houseNumber').invalid">{{getErrorMessageVoivodeship()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input placeholder="House number" type="text" name="houseNumberField"
+          formControlName="houseNumber" matInput required>
+        <mat-error *ngIf="form.get('houseNumber').invalid">{{getErrorMessageHouseNumber()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
+        <input placeholder="Apartment number" type="text" name="apartmentNumberField"
+          formControlName="apartmentNumber" matInput required>
+        <mat-error *ngIf="form.get('apartmentNumber').invalid">{{getErrorMessageApartmentNumber()}}</mat-error>
+      </mat-form-field>
+    </mat-tab>
+    <mat-tab label="Images">
+      <!-- <mat-form-field class="full-width">
+        <input placeholder="Primary image url" id="url" name="urlField" type="text"
+          matInput>
+        <mat-icon matSuffix>mode_edit</mat-icon>
+      </mat-form-field> -->
+
+      <br>
+      <input formControlName="photo" type="file" ng2FileSelect accept=".jpg" [uploader]="uploader" multiple />
+      <br />
+
+      <div class="drop-zone">
+        <div ng2FileDrop [uploader]="uploader" class="drop-zone">
+          Drag and drop files to upload
+        </div>
+      </div>
+
+      <table>
+        <thead>
+          <tr>
+            <th width="90%">
+              File Name
+            </th>
+            <th width="10%">
+              Remove
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of uploader.queue">
+            <th width="90%">
+              {{ item.file.name}}({{item.file.size/1000000}} MB)
+            </th>
+            <th class="text-center" width="10%">
+              <mat-icon style="cursor: pointer" (click)="item.remove()">delete</mat-icon>
+            </th>
+          </tr>
+        </tbody>
+      </table>
+    </mat-tab>
+  </mat-tab-group>
+  <button [disabled]="!form.valid" mat-raised-button color="primary">Save</button>
+</form>

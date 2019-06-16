@@ -1,38 +1,68 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.IO;
+using System.Threading.Tasks;
+using YourHome.Core.Abstract;
+using YourHome.Core.Enums;
 using YourHome.Core.Models.Domain;
-using YourHome.Core.Models.Dtos;
-using YourHome.Core.RepositoryInterfaces;
 
 namespace YourHome.Core.Services
 {
     public class OfferService : IOfferService
     {
         private readonly IOfferRepository _offerRepository;
-        private readonly IMapper _mapper;
+        private readonly IGeoCodeProvider _geoCodeProvider;
+        private readonly IImagePathBuilder _imageUrlBuilder;
+        private readonly IImageSaver _imageSaver;
 
-        public OfferService(IOfferRepository offerRepository, IMapper mapper)
+        public OfferService(IOfferRepository offerRepository, 
+            IGeoCodeProvider geoCodeProvider, 
+            IImagePathBuilder imageUrlBuilder,
+            IImageSaver imageSaver)
         {
             _offerRepository = offerRepository;
-            _mapper = mapper;
+            _geoCodeProvider = geoCodeProvider;
+            _imageUrlBuilder = imageUrlBuilder;
+            _imageSaver = imageSaver;
         }
 
-        public OfferDto GetOffer(string offerId)
+        public async Task<Offer> GetOfferAsync(string offerId)
         {
             var offer = _offerRepository.Get(offerId);
-            var offerDto = _mapper.Map<OfferDto>(offer);
-            return offerDto;
+            var coordinates = await _geoCodeProvider.GetCoordinatesAsync($"{offer.Location.City}, {offer.Location.HouseNumber}");
+            offer.Location.Coordinates = coordinates;
+            return offer;
         }
 
-        public OfferDto CreateOffer(OfferDto offerDto)
+        public IEnumerable<Offer> SearchOffers(SearchArguments searchArguments)
         {
-            var offer = _mapper.Map<Offer>(offerDto);
-            offer.Id = Guid.NewGuid().ToString();
-            _offerRepository.Add(offer);
+            var offers = _offerRepository.Search(searchArguments);
+            return offers;
+        }
 
-            return _mapper.Map<OfferDto>(offer);
+        public async Task<Offer> CreateOfferAsync(Offer offer, IFormFileCollection file)
+        {
+            var imagesIds = await _imageSaver.SaveImagesAsync(file);
+            offer.Id = Guid.NewGuid().ToString();
+            offer.Images = imagesIds;
+            offer.State = (int)StateOffer.NotConfirmed;
+            offer.CreationDate = new DateTime();
+            _offerRepository.Add(offer);
+            return offer;
+        }
+        
+        public void ActivateOffer(string offerId)
+        {
+            _offerRepository.Activate(offerId);
+        }
+
+        public FileStream GetPhoto(string id)
+        {
+            var path = _imageUrlBuilder.Build(id);
+            var image = File.OpenRead(path);
+            return image;
         }
     }
 }

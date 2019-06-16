@@ -1,15 +1,17 @@
 using System;
 using AutoMapper;
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using YourHome.API.Configuration;
-using YourHome.Core.RepositoryInterfaces;
+using YourHome.Core.Abstract;
 using YourHome.Core.Services;
+using YourHome.Core.Utils;
+using YourHome.Infrastructure;
 using YourHome.Infrastructure.Repositories;
 
 namespace API
@@ -26,12 +28,19 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
+                             .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<Startup>());
             services.AddElasticsearch(Configuration);
             services.AddAutoMapper();
+            
 
-            services.AddTransient<IOfferRepository, OfferRepository>();
-            services.AddTransient<IOfferService, OfferService>();
+            services.AddScoped<IOfferRepository, OfferRepository>();
+            services.AddScoped<IGeoCodeProvider, BingGeoCodeProvider>();
+            services.AddScoped<IOfferService, OfferService>();
+            services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<IEmailSender, GmailEmailSender>();
+            services.AddScoped<IImagePathBuilder, ImagePathBuilder>(i => new ImagePathBuilder(Configuration["ImagesFolderPath"]));
+            services.AddScoped<IImageSaver, ImageSaver>(i => new ImageSaver(Configuration["ImagesFolderPath"]));
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
