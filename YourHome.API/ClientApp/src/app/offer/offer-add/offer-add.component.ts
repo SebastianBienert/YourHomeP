@@ -48,6 +48,7 @@ export class OfferAddComponent implements OnInit {
       apartmentNumber : new FormControl('', [Validators.required]),
       district : new FormControl('', [Validators.required]),
       voivodeship : new FormControl('', [Validators.required]),
+      street : new FormControl('', [Validators.required]),
       photo : [null, null]
     })
   }
@@ -66,6 +67,7 @@ export class OfferAddComponent implements OnInit {
         city: this.form.get('city').value,
         district: this.form.get('district').value,
         voivodeship: this.form.get('voivodeship').value,
+        street: this.form.get('street').value,
         houseNumber: this.form.get('houseNumber').value,
         apartmentNumber: this.form.get('apartmentNumber').value
       } as NewLocation,
@@ -132,5 +134,9 @@ export class OfferAddComponent implements OnInit {
 
   getErrorMessageVoivodeship() {
     return this.form.get('voivodeship').hasError('required') ? this.textRequiredValue : '';
+  }
+
+  getErrorMessageStreet() {
+    return this.form.get('street').hasError('required') ? this.textRequiredValue : '';
   }
 }

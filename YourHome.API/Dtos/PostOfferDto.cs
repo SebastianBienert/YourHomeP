@@ -20,6 +20,8 @@ namespace YourHome.API.Dtos
 
         [FromForm(Name = "city")]
         public string City { get; set; }
+        [FromForm(Name = "street")]
+        public string Street { get; set; }
 
         [FromForm(Name = "district")]
         public string District { get; set; }

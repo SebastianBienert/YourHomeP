@@ -52,6 +52,12 @@
         <mat-error *ngIf="form.get('houseNumber').invalid">{{getErrorMessageVoivodeship()}}</mat-error>
       </mat-form-field>
       <mat-form-field class="full-width">
+        <input placeholder="Street" id="street" name="streetField" type="text"
+          formControlName="street" matInput required>
+        <mat-icon matSuffix>mode_edit</mat-icon>
+        <mat-error *ngIf="form.get('street').invalid">{{getErrorMessageStreet()}}</mat-error>
+      </mat-form-field>
+      <mat-form-field class="full-width">
         <input placeholder="House number" type="text" name="houseNumberField"
           formControlName="houseNumber" matInput required>
         <mat-error *ngIf="form.get('houseNumber').invalid">{{getErrorMessageHouseNumber()}}</mat-error>

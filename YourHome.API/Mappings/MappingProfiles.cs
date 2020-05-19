@@ -19,6 +19,7 @@ namespace YourHome.API.Mappings
                     {
                         ApartmentNumber = source.ApartmentNumber,
                         City = source.City,
+                        Street = source.Street,
                         District = source.District,
                         HouseNumber = source.HouseNumber,
                         Voivodeship = source.Voivodeship

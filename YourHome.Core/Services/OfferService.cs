@@ -31,7 +31,7 @@ namespace YourHome.Core.Services
         public async Task<Offer> GetOfferAsync(string offerId)
         {
             var offer = _offerRepository.Get(offerId);
-            var coordinates = await _geoCodeProvider.GetCoordinatesAsync($"{offer.Location.City}, {offer.Location.HouseNumber}");
+            var coordinates = await _geoCodeProvider.GetCoordinatesAsync($"{offer.Location.City}, {offer.Location.Street} {offer.Location.HouseNumber}");
             offer.Location.Coordinates = coordinates;
             return offer;
         }
