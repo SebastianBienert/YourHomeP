@@ -113,7 +113,7 @@ namespace YourHome.API.Controllers
 
         private IEnumerable<string> CreateUrlsToPhotos(IEnumerable<string> ids)
         {
-            return ids.Select(id => this.Url.Link("GetUserPhotoById", new {id = id}));
+            return ids.Select(id => id.Contains("http") ? id : this.Url.Link("GetUserPhotoById", new {id = id}));
         }
     }
 }
