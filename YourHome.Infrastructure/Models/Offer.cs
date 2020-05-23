@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using YourHome.Core.Models.Domain;
 
 namespace YourHome.Infrastructure.Models
 {
@@ -15,5 +16,8 @@ namespace YourHome.Infrastructure.Models
         public IEnumerable<string> Images { get; set; }
         public int Area { get; set; }
         public int State { get; set; }
+        public Market Market { get; set; }
+        public OfferType OfferType { get; set; }
+        public int RoomCount { get; set; }
     }
 }

@@ -47,14 +47,27 @@ namespace YourHome.Infrastructure.Repositories
                         .Match(m => m
                             .Field(f => f.Description)
                             .Query(searchArguments.SearchPhrase)
-                )
+                        )
             )
-            .Filter(fi => fi
-                 .Range(r => r
+            .Filter(fi => fi.Range(r => r
                     .Field(f => f.Price)
                     .GreaterThanOrEquals((double?)searchArguments.MinPrice)
-                    .LessThanOrEquals((double?)searchArguments.MaxPrice)
-                )
+                    .LessThanOrEquals((double?)searchArguments.MaxPrice))
+                        ,
+                    fi => fi.Range(r => r
+                        .Field(f => f.Area)
+                        .GreaterThanOrEquals(searchArguments.MinArea)
+                        .LessThanOrEquals(searchArguments.MaxArea))
+                        ,
+                    fi => fi.Range(r => r
+                            .Field(f => f.RoomCount)
+                            .GreaterThanOrEquals(searchArguments.MinRoomCount)
+                            .LessThanOrEquals(searchArguments.MaxRoomCount))
+                        ,
+                    bs => bs.Term(p => p.Market, searchArguments.Market)
+                        ,
+                    bs => bs.Term(p => p.OfferType, searchArguments.OfferType)
+
             )))
             .From((searchArguments.Page - 1) * PageSize)
             .Size(PageSize));
@@ -68,7 +81,7 @@ namespace YourHome.Infrastructure.Repositories
             var response = _elasticClient.Get<Offer>(offerId);
             var offer = _mapper.Map<Core.Models.Domain.Offer>(response.Source);
             var infrastructureOffer = _mapper.Map<Core.Models.Domain.Offer>(offer);
-            infrastructureOffer.State = (int) StateOffer.Active;
+            infrastructureOffer.State = (int)StateOffer.Active;
             _elasticClient.Index(infrastructureOffer, i => i);
         }
     }

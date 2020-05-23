@@ -16,5 +16,20 @@ namespace YourHome.Core.Models.Domain
         public IEnumerable<string> Images { get; set; }
         public int Area { get; set; }
         public int State { get; set; }
+        public Market Market { get; set; }
+        public OfferType OfferType { get; set; }
+        public int RoomCount { get; set; }
+    }
+
+    public enum Market
+    {
+        Primary = 0,
+        Secondary = 1
+    }
+
+    public enum OfferType
+    {
+        Sale = 0,
+        Rent = 1
     }
 }

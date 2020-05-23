@@ -34,9 +34,9 @@ namespace YourHome.API.Controllers
             var offer = await _offerService.GetOfferAsync(id);
             var offerDto = _mapper.Map<OfferDto>(offer);
             offerDto.Images = CreateUrlsToPhotos(offer.Images);
-            return Ok(offerDto);    
+            return Ok(offerDto);
         }
-        
+
         // POST: api/Offer
         [HttpPost]
         public async Task<IActionResult> Post([FromForm] PostOfferDto offerDto)
@@ -54,14 +54,20 @@ namespace YourHome.API.Controllers
 
         // GET: api/Offer/Search?searchPhrase=phrase
         [HttpGet("[action]", Name = "Search")]
-        public IActionResult Search(string searchPhrase, decimal? minPrice, decimal? maxPrice, int page = 1)
+        public IActionResult Search(string searchPhrase, decimal? minPrice, decimal? maxPrice, Market? market, OfferType offerType, int? minRoomCount, int? maxRoomCount, int? minArea, int? maxArea, int page = 1)
         {
             var searchArguments = new SearchArguments()
             {
                 MaxPrice = maxPrice,
                 MinPrice = minPrice,
                 Page = page,
-                SearchPhrase = searchPhrase
+                SearchPhrase = searchPhrase,
+                OfferType = offerType,
+                MinArea = minArea,
+                MaxRoomCount = maxRoomCount,
+                MinRoomCount = minRoomCount,
+                Market = market,
+                MaxArea = maxArea
             };
             var offers = _offerService.SearchOffers(searchArguments);
             var offerDtos = new List<OfferDto>();
@@ -113,7 +119,7 @@ namespace YourHome.API.Controllers
 
         private IEnumerable<string> CreateUrlsToPhotos(IEnumerable<string> ids)
         {
-            return ids.Select(id => id.Contains("http") ? id : this.Url.Link("GetUserPhotoById", new {id = id}));
+            return ids.Select(id => id.Contains("http") ? id : this.Url.Link("GetUserPhotoById", new { id = id }));
         }
     }
 }
