@@ -44,7 +44,6 @@ export class OfferService {
             params = params.append('offerType', searchParameters.offerType.toString());
          }
         params = params.append('page', searchParameters.page.toString());
-         debugger;
         return this.httpClient.get<Offer[]>(`api/offer/search`, { params: params });
     }
     

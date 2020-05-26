@@ -5,3 +5,9 @@
 mat-tab-group {
   min-height: 100%;
 }
+
+.add-form{
+  background-color: rgb(66, 66, 66);
+  padding: 25px;
+  border-radius: 15px;
+}

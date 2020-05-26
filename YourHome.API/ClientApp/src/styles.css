@@ -3,3 +3,10 @@
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 @import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body{
+    background-image: url('https://q-cf.bstatic.com/images/hotel/max1024x768/163/163300408.jpg') !important;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+  }

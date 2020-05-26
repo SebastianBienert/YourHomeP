@@ -25,6 +25,8 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .main-grid{
+    background-color: rgb(66, 66, 66);
     padding-top: 20px;
     z-index: 0;
+    border-radius: 15px;
 }

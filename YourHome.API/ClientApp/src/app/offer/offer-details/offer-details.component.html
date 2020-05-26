@@ -20,7 +20,10 @@
         <mat-divider></mat-divider>
       </mat-list>
       <mat-card-actions>
-        <button mat-raised-button (click)="openEmailDialog()">
+        <button 
+        [disabled]="!isActive"
+        mat-raised-button 
+        (click)="openEmailDialog()">
           Send message
           <mat-icon>message</mat-icon>
         </button>
