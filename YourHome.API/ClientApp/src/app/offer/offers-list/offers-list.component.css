@@ -6,3 +6,25 @@ input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none; 
     margin: 0; 
 }
+
+.radio-group {
+    display: flex;
+    flex-direction: column;
+    margin: 15px 0;
+}
+.mat-form-field {
+    width: 90% !important;
+}
+
+.internalMatGrid {  
+    min-width: 100%;
+}
+
+.internalMatGrid .mat-form-field{
+    font-size: 10px;
+}
+
+.main-grid{
+    padding-top: 20px;
+    z-index: 0;
+}

@@ -24,7 +24,8 @@ namespace YourHome.Core.Models.Domain
     public enum Market
     {
         Primary = 0,
-        Secondary = 1
+        Secondary = 1,
+        Both = 2
     }
 
     public enum OfferType

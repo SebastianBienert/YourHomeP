@@ -4,3 +4,8 @@
     padding-top: 50px;
   }
 }
+
+body{
+  background-image: url('https://q-cf.bstatic.com/images/hotel/max1024x768/163/163300408.jpg') !important;
+  background-color: aqua !important;
+}

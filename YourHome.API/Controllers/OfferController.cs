@@ -54,7 +54,10 @@ namespace YourHome.API.Controllers
 
         // GET: api/Offer/Search?searchPhrase=phrase
         [HttpGet("[action]", Name = "Search")]
-        public IActionResult Search(string searchPhrase, decimal? minPrice, decimal? maxPrice, Market? market, OfferType offerType, int? minRoomCount, int? maxRoomCount, int? minArea, int? maxArea, int page = 1)
+        public IActionResult Search(string searchPhrase, decimal? minPrice, decimal? maxPrice,
+            Market? market, OfferType offerType, int? minRoomCount, int? maxRoomCount,
+            int? minArea, int? maxArea,
+            int page = 1)
         {
             var searchArguments = new SearchArguments()
             {
@@ -66,7 +69,7 @@ namespace YourHome.API.Controllers
                 MinArea = minArea,
                 MaxRoomCount = maxRoomCount,
                 MinRoomCount = minRoomCount,
-                Market = market,
+                Market = market == Market.Both ? null : market,
                 MaxArea = maxArea
             };
             var offers = _offerService.SearchOffers(searchArguments);

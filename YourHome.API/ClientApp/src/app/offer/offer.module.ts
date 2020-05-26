@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { OfferDetailsComponent } from './offer-details/offer-details.component';
 import { OfferAddComponent } from './offer-add/offer-add.component';
 import { OfferService } from './offer.service';
-import { MatButtonModule, MatCheckboxModule, MatCardModule, MatMenuModule, MatIconModule, MatGridListModule, MatDividerModule, MatListModule, MatDialogModule, MatTabsModule, MatProgressBarModule } from '@angular/material';
+import {MatRadioModule, MatButtonModule, MatCheckboxModule, MatCardModule, MatMenuModule, MatIconModule, MatGridListModule, MatDividerModule, MatListModule, MatDialogModule, MatTabsModule, MatProgressBarModule } from '@angular/material';
 import { SlideshowModule } from 'ng-simple-slideshow';
 import { OffersListComponent } from './offers-list/offers-list.component';
 import { EmailDialogComponent } from './email-dialog/email-dialog.component';
@@ -23,6 +23,7 @@ import { FailureDialogComponent } from './failure-dialog/failure-dialog.componen
 import { FileSelectDirective, FileDropDirective, FileUploadModule } from 'ng2-file-upload';
 
 
+
 @NgModule({
   declarations: [
     OfferDetailsComponent,
@@ -37,6 +38,7 @@ import { FileSelectDirective, FileDropDirective, FileUploadModule } from 'ng2-fi
     // FileDropDirective,
     OffersListElementComponent],
   imports: [
+    MatRadioModule,
     FileUploadModule,
     MatMenuModule,
     MatButtonModule,

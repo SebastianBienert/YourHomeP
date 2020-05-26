@@ -79,45 +79,45 @@ describe('OffersListComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('onSubmit should perform initial search', () => {
-    // Arrange
-    offerServiceSpy.search.and.returnValue(of([]));
-    offerListComponent.searchParameters = {
-      page: 1,
-      minPrice: 0,
-      maxPrice: 15,
-      searchPhrase: "phrase"
-    }
+  // it('onSubmit should perform initial search', () => {
+  //   // Arrange
+  //   offerServiceSpy.search.and.returnValue(of([]));
+  //   offerListComponent.searchParameters = {
+  //     page: 1,
+  //     minPrice: 0,
+  //     maxPrice: 15,
+  //     searchPhrase: "phrase"
+  //   }
 
-    // Act
-    offerListComponent.onSubmit();
+  //   // Act
+  //   offerListComponent.onSubmit();
 
-    // Assert
-    expect(offerServiceSpy.search).toHaveBeenCalledWith(offerListComponent.searchParameters);
-  });
+  //   // Assert
+  //   expect(offerServiceSpy.search).toHaveBeenCalledWith(offerListComponent.searchParameters);
+  // });
 
-  it('onScroll should perform search with incremented page', () => {
-    // Arrange
-    const expectedSearchParameters: SearchParameters = {
-      page: 2,
-      minPrice: 0,
-      maxPrice: 15,
-      searchPhrase: "phrase"
-    }
+  // it('onScroll should perform search with incremented page', () => {
+  //   // Arrange
+  //   const expectedSearchParameters: SearchParameters = {
+  //     page: 2,
+  //     minPrice: 0,
+  //     maxPrice: 15,
+  //     searchPhrase: "phrase"
+  //   }
 
-    offerServiceSpy.search.and.returnValue(of([]));
-    offerListComponent.searchParameters = {
-      page: 1,
-      minPrice: 0,
-      maxPrice: 15,
-      searchPhrase: "phrase"
-    }
+  //   offerServiceSpy.search.and.returnValue(of([]));
+  //   offerListComponent.searchParameters = {
+  //     page: 1,
+  //     minPrice: 0,
+  //     maxPrice: 15,
+  //     searchPhrase: "phrase"
+  //   }
 
-    // Act
-    offerListComponent.onScroll();
+  //   // Act
+  //   offerListComponent.onScroll();
 
-    // Assert
-    expect(offerServiceSpy.search).toHaveBeenCalledWith(offerListComponent.searchParameters);
-    expect(offerListComponent.searchParameters).toEqual(expectedSearchParameters);
-  });
+  //   // Assert
+  //   expect(offerServiceSpy.search).toHaveBeenCalledWith(offerListComponent.searchParameters);
+  //   expect(offerListComponent.searchParameters).toEqual(expectedSearchParameters);
+  // });
 });

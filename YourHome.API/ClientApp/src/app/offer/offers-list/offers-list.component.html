@@ -1,26 +1,116 @@
   <form (ngSubmit)="onSubmit()" #searchForm="ngForm">
-    <mat-form-field>
-      <input matInput
-      placeholder="szukaj"
-      [(ngModel)]="searchParameters.searchPhrase"
-      name="cena od">
-    </mat-form-field>
-    <mat-form-field>
-    <input type="number" matInput
-      placeholder="cena minimalna"
-      [(ngModel)]="searchParameters.minPrice"
-      name="cena od">
-    </mat-form-field>
-    <mat-form-field>
-    <input type="number" matInput
-      placeholder="cena maksymalna"
-      [(ngModel)]="searchParameters.maxPrice"
-      name="cena do">
-    </mat-form-field>
-    <button type="submit"
-      mat-button
-      [disabled]="!searchForm.form.valid">Szukaj</button>
+    <mat-grid-list class="main-grid" cols="4" rowHeight="5:1">
+      <mat-grid-tile colspan="4">
+        <mat-form-field appearance="outline">
+          <input matInput
+          placeholder="Search"
+          [(ngModel)]="searchParameters.searchPhrase"
+          name="searchInput">
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile rowspan="2">
+        <mat-radio-group name="offerType"
+         class="radio-group" 
+         [(ngModel)]="searchParameters.offerType" 
+         aria-label="Select an option">
+          <mat-radio-button value="0">For sale</mat-radio-button>
+          <mat-radio-button value="1">For rent</mat-radio-button>
+        </mat-radio-group> 
+      </mat-grid-tile>
+
+
+      <mat-grid-tile rowspan="2">
+        <div class="internalMatGrid">
+
+          <mat-grid-list cols="2" rowHeight="4:1">
+
+            <mat-grid-tile>
+              <mat-form-field appearance="outline">
+                  <input type="number" matInput
+                  placeholder="Min rooms"
+                  [(ngModel)]="searchParameters.minRoomCount"
+                  name="roomsFrom">
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+              <mat-form-field appearance="outline">
+                  <input type="number" matInput
+                  placeholder="Max rooms"
+                  [(ngModel)]="searchParameters.maxRoomCount"
+                  name="roomsTo">
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+              <mat-form-field appearance="outline">
+                <input type="number" matInput
+                  placeholder="Price from"
+                  [(ngModel)]="searchParameters.minPrice"
+                  name="priceFrom">
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+              <mat-form-field appearance="outline">
+                  <input type="number" matInput
+                  placeholder="Price to"
+                  [(ngModel)]="searchParameters.maxPrice"
+                  name="priceTo">
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+              <mat-form-field appearance="outline">
+                <input type="number" matInput
+                  placeholder="Area from"
+                  [(ngModel)]="searchParameters.minArea"
+                  name="areaFrom">
+              </mat-form-field>
+            </mat-grid-tile>
+
+            <mat-grid-tile>
+              <mat-form-field appearance="outline">
+                  <input type="number" matInput
+                  placeholder="Area to"
+                  [(ngModel)]="searchParameters.maxArea"
+                  name="areaTo">
+              </mat-form-field>
+            </mat-grid-tile>
+
+          </mat-grid-list>
+        </div>
+
+      </mat-grid-tile>
+
+      <mat-grid-tile rowspan="2" colspan="1">
+        <mat-radio-group name="market" class="radio-group" [(ngModel)]="searchParameters.market" aria-label="Select an option">
+          <mat-radio-button value="0">Primary Market</mat-radio-button>
+          <mat-radio-button value="1">Secondary Market</mat-radio-button>
+          <mat-radio-button value="2">Both</mat-radio-button>
+        </mat-radio-group> 
+      </mat-grid-tile>
+
+      <mat-grid-tile rowspan="2">
+        <button type="submit"
+          mat-raised-button
+          [disabled]="!searchForm.form.valid">
+          Szukaj
+        </button>
+      </mat-grid-tile>
+
+    </mat-grid-list>
+
+    
+    
+    
+    
+     
+    
   </form>
+
+
   <div class="search-results"
     infinite-scroll
     [infiniteScrollDistance]="scrollDistance"

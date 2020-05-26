@@ -18,7 +18,6 @@ export class OfferService {
 
     search(searchParameters: SearchParameters): Observable<Offer[]> {
         let params = new HttpParams();
-
         params = params.append('searchPhrase', searchParameters.searchPhrase);
         if(searchParameters.minPrice){
             params = params.append('minPrice', searchParameters.minPrice.toString());
@@ -26,8 +25,26 @@ export class OfferService {
         if(searchParameters.maxPrice){
             params = params.append('maxPrice', searchParameters.maxPrice.toString());
         }
+        if(searchParameters.minArea){
+            params = params.append('minArea', searchParameters.minArea.toString());
+        }
+        if(searchParameters.maxArea){
+            params = params.append('maxArea', searchParameters.maxArea.toString());
+        }
+        if(searchParameters.maxArea){
+            params = params.append('minRoomCount', searchParameters.minRoomCount.toString());
+        }
+        if(searchParameters.maxArea){
+            params = params.append('maxRoomCount', searchParameters.maxRoomCount.toString());
+        }
+        if(searchParameters.market){
+            params = params.append('market', searchParameters.market.toString());
+        }
+        if(searchParameters.offerType){
+            params = params.append('offerType', searchParameters.offerType.toString());
+         }
         params = params.append('page', searchParameters.page.toString());
-
+         debugger;
         return this.httpClient.get<Offer[]>(`api/offer/search`, { params: params });
     }
     
