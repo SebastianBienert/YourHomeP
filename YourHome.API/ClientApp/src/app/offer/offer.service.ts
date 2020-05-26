@@ -31,10 +31,10 @@ export class OfferService {
         if(searchParameters.maxArea){
             params = params.append('maxArea', searchParameters.maxArea.toString());
         }
-        if(searchParameters.maxArea){
+        if(searchParameters.minRoomCount){
             params = params.append('minRoomCount', searchParameters.minRoomCount.toString());
         }
-        if(searchParameters.maxArea){
+        if(searchParameters.maxRoomCount){
             params = params.append('maxRoomCount', searchParameters.maxRoomCount.toString());
         }
         if(searchParameters.market){

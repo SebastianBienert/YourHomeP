@@ -15,22 +15,41 @@ export class OffersListComponent implements OnInit {
   throttle = 600;
   scrollDistance = 2;
   scrollUpDistance = 2;
+  loading: boolean;
 
   constructor(private offerService: OfferService) {
-
+    this.loading = false;
   }
 
   ngOnInit() {
-    this.offerService.search(new SearchParameters()).subscribe(o => this.offers = o)
+    this.loading = true;
+    this.offerService.search(new SearchParameters()).subscribe(o => {
+      this.offers = o;
+      this.loading = false;
+    }, error => {
+      this.loading = false;
+    })
   }
   
   onSubmit() {
+    this.loading = true;
     this.searchParameters.page = 1;
-    this.offerService.search(this.searchParameters).subscribe(o => this.offers = o)
+    this.offerService.search(this.searchParameters).subscribe(o => {
+      this.offers = o;
+      this.loading = false;
+    }, error => {
+      this.loading = false;
+    })
   }
 
   onScroll() {
+    this.loading = true;
     this.searchParameters.page++;
-    this.offerService.search(this.searchParameters).subscribe(o => this.offers.push(...o))
+    this.offerService.search(this.searchParameters).subscribe(o => {
+      this.offers.push(...o);
+      this.loading = false;
+    }, error => {
+      this.loading = false;
+    })
   }
 }

@@ -19,7 +19,6 @@
         </mat-radio-group> 
       </mat-grid-tile>
 
-
       <mat-grid-tile rowspan="2">
         <div class="internalMatGrid">
 
@@ -100,6 +99,9 @@
         </button>
       </mat-grid-tile>
 
+      <mat-grid-tile colspan="4">
+        <mat-progress-bar color="warm" mode="buffer" [hidden]="!loading"></mat-progress-bar>
+      </mat-grid-tile>
     </mat-grid-list>
 
     
