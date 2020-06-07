@@ -1,6 +1,3 @@
-
-[![Build Status](https://dev.azure.com/sebab1243/YourHome/_apis/build/status/YourHome%20Dev?branchName=master)](https://dev.azure.com/sebab1243/YourHome/_build/latest?definitionId=4&branchName=master)
-
 ## YourHome
 [.NET Core + Angular 7 + Elastic Search] house hunting web application.
 
@@ -15,4 +12,14 @@ Architecture based on Clean Architecture for .NET Core implemented by [Ardalis](
 - [Automapper](https://automapper.org/) - A convention-based object-object mapper.
 - [Elasticsearch](https://www.elastic.co/) - a distributed, RESTful search and analytics engine capable of solving a growing number of use cases
 - [Bing Maps API](https://www.bing.com/maps) - a web mapping service provided as a part of Microsoft's Bing suite
+
+## Site
+### Offer view
+### ![Offer view](oferta.png)
+
+### Searching view
+### ![Searching view](wyszukiwanie.png)
+
+### Offer form
+### ![Offer form](general.png)
 
